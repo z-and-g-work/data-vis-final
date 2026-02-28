@@ -28,15 +28,39 @@
         .attr("fill", "purple");
     }
 
-    function make_people () {
-        let row = -1; // i = 0 on the first pass, will become 0 before functions start
-        for (let i = 0; i < 562; i++) {
-            const x_offset = (i * 30) % 960;// make sure these are divisable
-            if (!x_offset) { 
-                row++;
-            };
+    // mapped everything on desmos and had claude use my points to the desmos line. it didnt do a great job, but hey proof of concept
 
-            make_person(25 + x_offset, 20 + row * 50);
+    const xScale = d3.scaleLinear().domain([-20, 20]).range([0, 1000]);
+    const yScale = d3.scaleLinear().domain([0, 20]).range([1000, 0]);
+
+    const rowCurves = [
+        { a: -0.05,  b: 3  },
+        { a: -0.045, b: 5  },
+        { a: -0.04,  b: 7  },
+        { a: -0.035, b: 9  },
+        { a: -0.03,  b: 11 },
+        { a: -0.025, b: 13 },
+        { a: -0.02,  b: 15 },
+        { a: -0.015, b: 17 },
+        { a: -0.01,  b: 19 },
+    ];
+
+    const cols = 32;
+
+    function make_people() {
+        for (let row = 0; row < rowCurves.length; row++) {
+            const { a, b } = rowCurves[row];
+
+            for (let col = 0; col < cols; col++) {
+                // Map col index to math x: -20 to 20
+                const mathX = -20 + (col / (cols - 1)) * 40;
+                const mathY = a * mathX * mathX + b;
+
+                const svgX = xScale(mathX);
+                const svgY = yScale(mathY);
+
+                make_person(svgX - 11, svgY - 11); // center the person icon
+            }
         }
     }
 
