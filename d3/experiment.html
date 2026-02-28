@@ -29,13 +29,14 @@
     }
 
     function make_people () {
-        let row = 0;
-        for (let i = 0; i < 100; i++) {
-            if (!((i * 60) % 900)) { // make sure these are divisable
+        let row = -1; // i = 0 on the first pass, will become 0 before functions start
+        for (let i = 0; i < 562; i++) {
+            const x_offset = (i * 30) % 960;// make sure these are divisable
+            if (!x_offset) { 
                 row++;
             };
 
-            make_person((i * 60) % 900, row * 100);
+            make_person(25 + x_offset, 20 + row * 50);
         }
     }
 
