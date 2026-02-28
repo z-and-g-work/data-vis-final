@@ -1,30 +1,31 @@
-# just felt like it was not needed to get this information every time someone goes on the page - kinda a lame thing to do with a free api
 import requests
 from dotenv import load_dotenv
 import json
 import os
-import tqdm
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 load_dotenv()
 
 api_key = os.getenv("CONGRESS_API_KEY")
 base_url = "https://api.congress.gov/v3"
 
-# max per request is 250. loop that baby its inf
+# I nicely asked claude to use subprocesses cause I did the math and it would have been at least a few days
+
+# ── 1. Fetch all members ──────────────────────────────────────────────────────
 members = []
 offset = 0
-limit = 250 # max for our data source
+limit = 250
 
 url = f"{base_url}/member"
-params = {
-    "api_key": api_key,
-    "currentMember": "true",
-    "limit": limit,
-    "offset": offset,
-    "format": "json"
-}
 
-while 1:
+while True:
+    params = {
+        "api_key": api_key,
+        # "currentMember": "true",
+        "limit": limit,
+        "offset": offset,
+        "format": "json"
+    }
     response = requests.get(url, params=params)
     response.raise_for_status()
     data = response.json()
@@ -35,55 +36,80 @@ while 1:
 
     members.extend(batch)
 
-    # Check if there are more pages
     total = data.get("pagination", {}).get("count", 0)
     offset += limit
-
     if offset >= total:
         break
-    else: break
 
-useful_data = []
-extra_useful_data = [] # kinda a misnomer
-logs = []
-# get yob and terms
-for i, member in enumerate(members):
-    if not i % 5:
-        print(f"Out of {len(members)} you've done \t{round(100 * i / len(members), 2)}%\t aka {i}")
+print(f"Fetched {len(members)} members. Starting parallel detail fetch...")
 
-    url = f"{base_url}/member/{member['bioguideId']}"
-    params = {
-        "api_key": api_key,
-        "format": "json"
-    }
-
-    response = requests.get(url, params=params)
-    response.raise_for_status()
-    too_much_data = response.json()
-
-    data = {'yob': 0, 'terms': 0}
-    extra_data = {'yob': 0, 'terms': [], 'state': '', 'img': '', 'name': '', 'district': 0}
+# ── 2. Fetch each member's detail in parallel ─────────────────────────────────
+def fetch_member(member):
+    """Returns (index, useful_data, extra_useful_data, log_entry_or_None)"""
+    bio_id = member["bioguideId"]
+    url = f"{base_url}/member/{bio_id}"
+    params = {"api_key": api_key, "format": "json"}
 
     try:
-        data["yob"] = too_much_data['member']['birthYear']
-        data["terms"] = too_much_data['member']['terms']
-        extra_data["yob"] = too_much_data['member']['birthYear']
-        extra_data["terms"] = too_much_data['member']['terms']
-        extra_data["state"] = too_much_data['member']['state']
-        extra_data["name"] = too_much_data['member']['directOrderName']
-        extra_data["img"] = too_much_data['member']['depiction']['imageUrl']
-        extra_data["district"] = too_much_data['member']['district']
-    except Exception as e:
-        logs.append(f"{member['bioguideId']} epicly failed! {e}")
+        response = requests.get(url, params=params)
+        response.raise_for_status()
+        m = response.json()["member"]
 
-    useful_data.append(data)
-    extra_useful_data.append(extra_data)
+        data = {
+            "yob": m.get("birthYear", 0),
+            "terms": m.get("terms", 0)
+        }
+        extra_data = {
+            "yob": m.get("birthYear", 0),
+            "terms": m.get("terms", []),
+            "state": m.get("state", ""),
+            "img": m.get("depiction", {}).get("imageUrl", ""),
+            "name": m.get("directOrderName", ""),
+            "district": m.get("district", 0)
+        }
+        return (member, data, extra_data, None)
+
+    except Exception as e:
+        empty = {"yob": 0, "terms": 0}
+        empty_extra = {"yob": 0, "terms": [], "state": "", "img": "", "name": "", "district": 0}
+        return (member, empty, empty_extra, f"{bio_id} epicly failed! {e}")
+
+
+MAX_WORKERS = 60 # claude rec - well see if we hit the 5000 / hour rate limit - at that rate it might take 4 hours? congress has had 10,000 
+
+useful_data = [None] * len(members)
+extra_useful_data = [None] * len(members)
+logs = []
+completed = 0
+
+# Use a dict to preserve original order
+index_map = {m["bioguideId"]: i for i, m in enumerate(members)}
+
+with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+    futures = {executor.submit(fetch_member, m): m for m in members}
+
+    for future in as_completed(futures):
+        member, data, extra_data, log = future.result()
+        idx = index_map[member["bioguideId"]]
+        useful_data[idx] = data
+        extra_useful_data[idx] = extra_data
+        if log:
+            logs.append(log)
+
+        completed += 1
+        if completed % 10 == 0 or completed == len(members):
+            print(f"  {completed}/{len(members)} ({round(100 * completed / len(members), 1)}%)")
+
+# ── 3. Write output ───────────────────────────────────────────────────────────
+os.makedirs('./public/data', exist_ok=True)
 
 with open('./public/data/min_members.json', 'w') as f:
-    f.write(json.dumps(useful_data))
+    json.dump(useful_data, f)
 
 with open('./public/data/members.json', 'w') as f:
-    f.write(json.dumps(extra_useful_data))
+    json.dump(extra_useful_data, f)
 
 with open('./public/data/logs.txt', 'w') as f:
     f.write('\n'.join(logs))
+
+print(f"Done! {len(logs)} errors logged.")
