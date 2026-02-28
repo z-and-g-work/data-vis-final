@@ -1,6 +1,10 @@
 Final Project - Interactive Data Visualization  
 ===
 
+#### gabe wants to say
+-[ ] random locations - purposful. not cause we are lazy or anything like that. def not... this is a way we can remove political bias in a way.
+-[ ] I reiderate (and for ben, i iderate) this is not about what party they belong to. I think that would ultimatly hurt us. this is about age (which people can probably guess to probably like a 70 percent average if not more) and bringing in the party they belong to is not the issue I would like to be highted. I want this to show how little power the young generations have in politics. 
+
 * Edit 04-Feb-2025 -> adding link to a Notion doc of ideas (totally optional, mainly ideas collected from recent convos w/ people) -> https://scented-flock-323.notion.site/Project-Ideas-18fcf1e51ce380f79f92d4faf3ae7b4a?pvs=4
 
 The key learning experience of this course is the final project. 
