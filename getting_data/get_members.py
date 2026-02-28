@@ -9,7 +9,7 @@ load_dotenv()
 api_key = os.getenv("CONGRESS_API_KEY")
 base_url = "https://api.congress.gov/v3"
 
-# I nicely asked claude to use subprocesses cause I did the math and it would have been at least a few days
+# I nicely asked claude to use subprocesses cause I did the math and it would have been at least a few days - i do think i over estitmated the time, but with this it was 60x faster and took a few min, so it would have taken a few HOURS 
 
 # ── 1. Fetch all members ──────────────────────────────────────────────────────
 members = []
