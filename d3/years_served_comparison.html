@@ -22,7 +22,6 @@
     const data = await d3.json("/public/data/members.json");
     console.log(data)
 
-
     const filteredData = getMembersFromYear(chamber, year, data);
 
     console.log(filteredData)
@@ -84,19 +83,19 @@
         .attr("transform", `translate(${marginLeft},0)`)
         .call(d3.axisLeft(y).ticks(5));
 
-    //create each bar
-    svg.append("g")
-        .attr("fill", "#0984e3")
-        .selectAll()
-        .data(bins)
-        .join("rect")
-        .attr("x", (d, i) => x(xLabels[i]))
-        .attr("y", d => y(d.length))
-        .attr("stroke", "black")
-
-        .attr("stroke-width", 1)
-        .attr("height", d => y(0) - y(d.length))
-        .attr("width", x.bandwidth())
+    // //create each bar
+    // svg.append("g")
+    //     .attr("fill", "#0984e3")
+    //     .selectAll()
+    //     .data(bins)
+    //     .join("rect")
+    //     .attr("x", (d, i) => x(xLabels[i]))
+    //     .attr("y", d => y(d.length))
+    //     .attr("stroke", "black")
+    //
+    //     .attr("stroke-width", 1)
+    //     .attr("height", d => y(0) - y(d.length))
+    //     .attr("width", x.bandwidth())
 
     container.append(svg.node());
 
