@@ -25,6 +25,7 @@
 
     const filteredData = getMembersFromYear(chamber, year, data);
 
+    //todo: delete console.logs
     console.log(filteredData)
     const sortedFilteredData = filteredData.sort((a, b) => a.state.localeCompare(b.state));
     console.log(sortedFilteredData)
