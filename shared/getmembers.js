@@ -27,7 +27,7 @@ export function getYearsServed(year, data) {
             }
         })
 
-        //list position 2 is house, position 3 is senate
-        return [member.name, member.yob, houseYears, senateYears]
+        //list position 1 is age,  2 is house, position 3 is senate
+        return [member.name, year - member.yob, houseYears, senateYears]
     })
 }

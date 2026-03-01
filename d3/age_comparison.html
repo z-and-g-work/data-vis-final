@@ -18,25 +18,15 @@
     const year = 2024;
     const chamber = "Senate"
 
-    //GET ALL DATA
+    //get all data
     const data = await d3.json("/public/data/members.json");
-    console.log(data)
-
-
+    //get members from specified year
     const filteredData = getMembersFromYear(chamber, year, data);
-
-    //todo: delete console.logs
-    console.log(filteredData)
-    const sortedFilteredData = filteredData.sort((a, b) => a.state.localeCompare(b.state));
-    console.log(sortedFilteredData)
 
     //get ages of each member and sort them into bins
     const ages = filteredData.map(d => year - d.yob)
-    console.log(ages)
     const bin = d3.bin().domain([25, 110]).thresholds([31, 41, 51, 61, 71, 81]);
     const bins = bin(ages);
-
-    console.log(bins)
 
     //set names of each bin
     const xLabels = bins.map((d, i) => {
@@ -62,6 +52,7 @@
         .attr("width", width)
         .attr("height", height + 25);
 
+    //create labels
     svg.append("text")
         .attr("x", width/2 - 30)
         .attr("y", height + 20)
