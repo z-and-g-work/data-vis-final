@@ -1,7 +1,9 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 import Chart from '../components/Example.svelte';
+import ManIcon from '../components/ManIcon.svelte';
+import PeopleRow from '../components/PeopleRow.svelte';
+import Meicycle from '../components/Meicycle.svelte';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -9,11 +11,38 @@ import Chart from '../components/Example.svelte';
 
 <html>
 <body>
-	<h1>D3 + Svelte + Astro being used!</h1>
-	<Chart client:load/>
+	<br></br><br></br><br></br>
+	<div class="meicycle-wrapper">
+      <Meicycle
+        rows={[21,19,17,15,13,11,9]}
+        width={900}
+        rowHeight={260}
+        rowGap={-200}
+      />
+    </div>
+
+	<h1>ManIcon Test</h1>
+	<ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/>
+	<ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/>
+	<ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/>
+	<ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/>
 </body>
 </html>
 
 <Layout>
-	<Welcome />
+	
 </Layout>
+
+<style>
+	html {
+        background-color: #636e72;
+    }
+
+	.meicycle-wrapper {
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		vertical-align: center;
+	}
+</style>
