@@ -14,8 +14,8 @@
     const marginLeft = 60;
 
     //todo: get this data from somewhere else
-    const year = 2022;
-    const chamber = "House of Representatives"
+    const year = 2017;
+    const chamber = "Senate"
 
     //GET ALL DATA
     const data = await d3.json("/public/data/members.json");
@@ -23,10 +23,12 @@
 
     //takes year and chamber (senate or house) and gets every member that served that year
     function getMembersFromYear(chamber, year) {
+        const congressNumberThatYear = Math.ceil((year - 1788) / 2);
+
         const filteredData = data.filter(member => {
             let servedYear = false;
             member.terms.forEach(term => {
-                if (term.chamber === chamber && term.startYear <= year && term.endYear > year) {
+                if (term.chamber === chamber && term.congress === congressNumberThatYear) {
                     //console.log(member.name)
                     servedYear = true;
                 }
@@ -37,6 +39,11 @@
     }
 
     const filteredData = getMembersFromYear(chamber, year);
+
+    const states = filteredData.map(d => d.state);
+    console.log(filteredData)
+    const sortedFilteredData = filteredData.sort((a, b) => a.state.localeCompare(b.state));
+    console.log(sortedFilteredData)
 
     //get ages of each member and sort them into bins
     const ages = filteredData.map(d => year - d.yob)
