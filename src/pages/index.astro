@@ -1,9 +1,7 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Chart from '../components/Example.svelte';
 import ManIcon from '../components/ManIcon.svelte';
-import PeopleRow from '../components/PeopleRow.svelte';
 import Meicycle from '../components/Meicycle.svelte';
+import '../styles/style.css';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -11,7 +9,9 @@ import Meicycle from '../components/Meicycle.svelte';
 
 <html>
 <body>
-	<br></br><br></br><br></br>
+	<h1>Politicians</h1>
+	<h3>With Age Comes With Experience</h3>
+
 	<div class="meicycle-wrapper">
       <Meicycle
         rows={[21,19,17,15,13,11,9]}
@@ -28,21 +28,3 @@ import Meicycle from '../components/Meicycle.svelte';
 	<ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/>
 </body>
 </html>
-
-<Layout>
-	
-</Layout>
-
-<style>
-	html {
-        background-color: #636e72;
-    }
-
-	.meicycle-wrapper {
-		min-height: 100vh;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		vertical-align: center;
-	}
-</style>

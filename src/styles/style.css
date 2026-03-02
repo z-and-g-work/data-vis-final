@@ -1,0 +1,74 @@
+/* @font-face {
+  font-family: 'usag';
+  src: url('../fonts/usa/usag.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+} */
+
+/* @font-face {
+  font-family: 'usag';
+  src: url('../fonts/Personal License/All Americans Personal.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+} */
+
+:root {
+  --background: #74b9ff;
+  --text-: #00b894;
+  --text-primary: #2d3436;
+  --text-title: #d63031;
+  --text-subtitle: #d63031;
+}
+
+
+@font-face {
+  font-family: 'legal';
+  src: url('../fonts/legal-tender/legalv2.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'farmers-market';
+  src: url('../fonts/farmers-market/FarmersMarket.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* h1 {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-family: 'farmers-market', sans-serif;
+  font-weight: 400;
+  color: var(--text-title);
+} */
+
+h1, h3 {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-family: 'legal', sans-serif;
+  color: var(--text-subtitle);
+}
+
+h1, h3 {
+  text-shadow:
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 30px #fff;
+}
+
+
+
+html {
+  background-color: var(--background);
+}
+
+.meicycle-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: center;
+}
