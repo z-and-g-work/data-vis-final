@@ -4,7 +4,8 @@
     import {getMembersFromYear} from "../shared/getmembers.js";
     import {onMount} from "svelte";
 
-    export let selectedYear;
+    export let year;
+    export let chamber;
 
     let container;
     let svg;
@@ -21,11 +22,11 @@
         const marginBottom = 30;
         const marginLeft = 60;
 
-        const year = selectedYear;
-        const chamber = "Senate"
+        const congressNumberThatYear = Math.ceil((year - 1788) / 2);
+        console.log(congressNumberThatYear);
 
-        //get all data
-        const data = await d3.json("/public/data/members.json");
+        //get all data from that year's congress
+        const data = await d3.json(`/public/data/by_congress/${congressNumberThatYear}.json`);
         //get members from specified year
         const filteredData = getMembersFromYear(chamber, year, data);
 
@@ -84,7 +85,7 @@
 
         //create each bar
         d3.select(svg).append("g")
-            .attr("fill", "#00b894")
+            .attr("fill", (chamber === "Senate" ? "#00b894" : "#a29bfe"))
             .selectAll()
             .data(bins)
             .join("rect")
@@ -104,7 +105,7 @@
         mounted = true;
     })
 
-    $: if (mounted && selectedYear) {
+    $: if (mounted && year) {
         createChart();
     }
 
