@@ -17,17 +17,12 @@
   export let skinColor = '#74b9ff';
   export let padding = 60; // passed through to PeopleRow
 
-  if ($congressData === null) {
-    loadYear(2024);
-  }
+  $: yearsServed = $congressData ? getYearsServed($selectedYear, $congressData) : [];
 
-  console.log($congressData);
+  console.log(yearsServed);
 
-  try {
-    getYearsServed($selectedYear, $congressData);
-  } catch (error) {
-    console.log(error);
-  }
+  // parse thru the arrays 
+
 </script>
 
 <svg

@@ -2,9 +2,14 @@ import { writable } from 'svelte/store';
 import * as d3 from 'd3';
 
 export const selectedYear = writable(2024);
-export const congressData = writable(fetchYear(2024)); // this can not stay null
+export const congressData = writable(null); // this can not stay null
 
 const cache = {};
+
+// Only fetch in the browser, not during SSR
+if (typeof window !== 'undefined') {
+    fetchYear(2024).then(data => congressData.set(data));
+}
 
 async function fetchYear(year) {
     const congressNumber = Math.ceil((year - 1788) / 2);
