@@ -23,7 +23,6 @@
         const marginLeft = 60;
 
         const congressNumberThatYear = Math.ceil((year - 1788) / 2);
-        console.log(congressNumberThatYear);
 
         //get all data from that year's congress
         const data = await d3.json(`/public/data/by_congress/${congressNumberThatYear}.json`);

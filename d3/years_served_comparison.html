@@ -18,8 +18,10 @@
     const year = 2024;
     const chamber = "House of Representatives"
 
-    //get all data
-    const data = await d3.json("/public/data/members.json");
+    const congressNumberThatYear = Math.ceil((year - 1788) / 2);
+
+    //get all data from that year's congress
+    const data = await d3.json(`/public/data/by_congress/${congressNumberThatYear}.json`);
     //get members from specified year
     const houseFilteredData = getMembersFromYear("House of Representatives", year, data);
     const senateFilteredData = getMembersFromYear("Senate", year, data)

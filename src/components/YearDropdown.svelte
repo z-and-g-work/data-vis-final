@@ -1,5 +1,6 @@
 <script>
     import AgeComparisonChart from "./AgeComparisonChart.svelte";
+    import YearsServedChart from "./YearsServedChart.svelte";
 
     let year = 2024;
     let options = [];
@@ -14,5 +15,6 @@
     {/each}
 </select>
 
+<YearsServedChart {year} />
 <AgeComparisonChart chamber={"Senate"} {year} />
 <AgeComparisonChart chamber={"House of Representatives"} {year} />
