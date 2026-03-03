@@ -1,12 +1,11 @@
 ---
 import ManIcon from '../components/ManIcon.svelte';
 import Meicycle from '../components/Meicycle.svelte';
-import AgeComparisonGraph from '../components/AgeComparisonGraph.svelte';
-import YearsServedGraph from '../components/YearsServedGraph.svelte';
 import Footer from '../components/Footer.svelte';
 import '../styles/style.css';
 import Layout from '../layouts/Layout.astro';
 import AgeComparisonChart from '../components/AgeComparisonChart.svelte'
+import YearsServedChart from "../components/YearsServedChart.svelte";
 import YearDropdown from "../components/YearDropdown.svelte";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
@@ -28,9 +27,8 @@ import YearDropdown from "../components/YearDropdown.svelte";
         rowGap={-200}
       />
     </div>
-
+	<YearsServedChart client:load />
 	<br></br>
-
   <AgeComparisonChart chamber={"Senate"} client:load/>
   <AgeComparisonChart chamber={"House of Representatives"} client:load/>
 
