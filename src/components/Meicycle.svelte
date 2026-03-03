@@ -1,5 +1,7 @@
 <script>
   import PeopleRow from './PeopleRow.svelte';
+  import { getMembersFromYear, getYearsServed } from "./../shared/getmembers.js";
+  import { selectedYear, congressData } from "./../shared/dataManager.js";
 
   /**
    * Array of numbers representing how many icons per row.
@@ -14,6 +16,18 @@
   export let shirtColor = '#ff7675';
   export let skinColor = '#74b9ff';
   export let padding = 60; // passed through to PeopleRow
+
+  if ($congressData === null) {
+    loadYear(2024);
+  }
+
+  console.log($congressData);
+
+  try {
+    getYearsServed($selectedYear, $congressData);
+  } catch (error) {
+    console.log(error);
+  }
 </script>
 
 <svg

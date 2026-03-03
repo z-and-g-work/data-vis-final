@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 import * as d3 from 'd3';
 
 export const selectedYear = writable(2024);
-export const congressData = writable(null); // this can not stay null
+export const congressData = writable(fetchYear(2024)); // this can not stay null
 
 const cache = {};
 
