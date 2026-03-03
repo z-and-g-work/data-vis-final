@@ -1,0 +1,85 @@
+/* @font-face {
+  font-family: 'usag';
+  src: url('../fonts/usa/usag.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+} */
+
+/* @font-face {
+  font-family: 'usag';
+  src: url('../fonts/Personal License/All Americans Personal.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+} */
+
+:root {
+  --background: #f5e6c8;
+  --text-: #00b894;
+  --text-primary: #2d3436;
+  --text-title: #d63031;
+  --text-subtitle: #d63031;
+}
+
+@font-face {
+  font-family: 'legal-bold';
+  src: url('../fonts/legal-tender/legalv2.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'legal';
+  src: url('../fonts/legal-tender/legalv2c.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  background-color: var(--background);
+}
+
+h1, h3 {
+  text-align: center;
+  font-family: 'legal-bold', sans-serif;
+  color: var(--text-subtitle);
+}
+
+h1, h3 {
+  text-shadow:
+    0 0 4px #fff,
+    0 0 16px #fff,
+    0 0 24px #fff;
+}
+
+h2 {
+  text-align: center;
+  font-family: 'legal-bold', sans-serif;
+  color: var(--text-title);
+}
+
+.graph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  min-height: 60vh; /* ensure some vertical space for centering */
+}
+
+p {
+  font-family: 'legal', sans-serif;
+  color: var(--text-primary);
+  font-weight: 400;
+}
+
+hr {
+  color: var(--text-primary);
+}
+
+.meicycle-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: center;
+}
