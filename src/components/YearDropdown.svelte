@@ -1,14 +1,25 @@
 <script>
+    import { onMount } from "svelte";
     import AgeComparisonChart from "./AgeComparisonChart.svelte";
     import { getMembersFromYear } from "../shared/getmembers.js";
-    import { selectedYear, congressData } from "./../shared/dataManager.js";
+    import { selectedYear, congressData, loadYear } from "./../shared/dataManager.js";
 
-    let year = 2024;
+    onMount(() => loadYear(2024));
+
     let options = [];
 
     for (let i = 1995; i < 2025; i++) {
         options.push(i)
     }
+
+    let mounted = false;
+
+    onMount(() => {
+        mounted = true;
+        loadYear($selectedYear);
+    });
+
+    $: if (mounted) loadYear($selectedYear);
 
 </script>
 
@@ -19,4 +30,4 @@
 </select>
 
 <AgeComparisonChart chamber={"Senate"} />
-<AgeComparisonChart chamber={"House of Representatives"} { year } />
+<AgeComparisonChart chamber={"House of Representatives"} />

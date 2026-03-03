@@ -3,7 +3,7 @@
     import * as d3 from "d3";
     import {getMembersFromYear} from "../shared/getmembers.js";
     import {onMount} from "svelte";
-    import { selectedYear, congressData } from "../shared/dataManager.js";
+    import { selectedYear, congressData, loadYear } from "../shared/dataManager.js";
 
     // export let year;
     export let chamber;
@@ -30,13 +30,13 @@
         const marginLeft = 60;
 
         const congressNumberThatYear = Math.ceil((year - 1788) / 2);
-        console.log(congressNumberThatYear);
+        // console.log(congressNumberThatYear);
 
         //get all data from that year's congress todo: remove
         // const data = await d3.json(`/public/data/by_congress/${congressNumberThatYear}.json`);
         //get members from specified year
         // const filteredData = getMembersFromYear(chamber, year, data);
-        const filteredData = getMembersFromYear(chamber, year, $congressData);
+        const filteredData = getMembersFromYear(chamber, year, data);
 
         //get ages of each member and sort them into bins
         const ages = filteredData.map(d => year - d.yob)
@@ -112,6 +112,9 @@
 
     $: if (mounted && $congressData && $selectedYear) {
         createChart($congressData, $selectedYear);
+    } else if (mounted && $selectedYear) {
+        loadYear($selectedYear);
+        createChart();
     }
 
 </script>
