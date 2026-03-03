@@ -51,6 +51,21 @@ h1, h3 {
     0 0 24px #fff;
 }
 
+h2 {
+  text-align: center;
+  font-family: 'legal-bold', sans-serif;
+  color: var(--text-title);
+}
+
+.graph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  min-height: 60vh; /* ensure some vertical space for centering */
+}
+
 p {
   font-family: 'legal', sans-serif;
   color: var(--text-primary);

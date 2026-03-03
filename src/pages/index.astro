@@ -1,6 +1,8 @@
 ---
 import ManIcon from '../components/ManIcon.svelte';
 import Meicycle from '../components/Meicycle.svelte';
+import AgeComparisonGraph from '../components/AgeComparisonGraph.svelte';
+import YearsServedGraph from '../components/YearsServedGraph.svelte';
 import Footer from '../components/Footer.svelte';
 import '../styles/style.css';
 
@@ -22,13 +24,21 @@ import '../styles/style.css';
       />
     </div>
 
-	<p> text test. i want to see if this is going to be readable. its ok. it really is not the best for text as it is CAPSLOCKED</p>
+	<br></br>
+	<p>Good old explanation test and whatnot.</p>
+	<br></br>
 
-	<h1>ManIcon Test</h1>
-	<ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/>
-	<ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/>
-	<ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/>
-	<ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/><ManIcon client:load/>
+    <section class="graph">
+      <h2>Age Distribution</h2><br>
+      <AgeComparisonGraph client:load />
+    </section>
+	<br></br>
+	Super epic, awesome, cool, regal text e
+
+    <section class="graph">
+      <h2>Years Served by Age</h2>
+      <YearsServedGraph client:load />
+    </section>
 
 	<Footer />
 </body>
