@@ -1,0 +1,7 @@
+    {#if part === 'full' || part === 'head'}
+      <circle cx="100" cy="70" r="35" fill={skinColor} />
+      <path
+          d="M65 60 A75 60 0 0 1 135 60 Z"
+          fill={hairColor}
+      />
+    {/if}
