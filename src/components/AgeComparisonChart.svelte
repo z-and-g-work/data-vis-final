@@ -3,14 +3,21 @@
     import * as d3 from "d3";
     import {getMembersFromYear} from "../shared/getmembers.js";
     import {onMount} from "svelte";
+    import { selectedYear, congressData } from "../shared/dataManager.js";
 
-    export let year;
+    // export let year;
     export let chamber;
 
-    let container;
+    // let container;
     let svg;
+    let mounted = false;
 
-    async function createChart() {
+    async function createChart(data, year) {
+        if (!data || !year) {
+            console.log("data or year is null or undefined");
+            return;
+        };
+
         //first get rid of previous chart
         d3.select(svg).selectAll("*").remove();
 
@@ -25,10 +32,11 @@
         const congressNumberThatYear = Math.ceil((year - 1788) / 2);
         console.log(congressNumberThatYear);
 
-        //get all data from that year's congress
-        const data = await d3.json(`/public/data/by_congress/${congressNumberThatYear}.json`);
+        //get all data from that year's congress todo: remove
+        // const data = await d3.json(`/public/data/by_congress/${congressNumberThatYear}.json`);
         //get members from specified year
-        const filteredData = getMembersFromYear(chamber, year, data);
+        // const filteredData = getMembersFromYear(chamber, year, data);
+        const filteredData = getMembersFromYear(chamber, year, $congressData);
 
         //get ages of each member and sort them into bins
         const ages = filteredData.map(d => year - d.yob)
@@ -98,15 +106,12 @@
             .attr("width", x.bandwidth())
     }
 
-    let mounted = false;
-
     onMount(() => {
-        createChart();
         mounted = true;
     })
 
-    $: if (mounted && year) {
-        createChart();
+    $: if (mounted && $congressData && $selectedYear) {
+        createChart($congressData, $selectedYear);
     }
 
 </script>
