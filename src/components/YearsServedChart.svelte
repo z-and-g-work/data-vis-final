@@ -1,15 +1,16 @@
 <script>
 
-    import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+    import * as d3 from "d3";
     import {getMembersFromYear, getYearsServed} from "../shared/getmembers.js";
     import {onMount} from "svelte";
+    import { selectedYear, congressData, loadYear } from "../shared/dataManager.js";
 
-    export let year;
+    //export let year;
 
-    let container;
     let svg;
+    let mounted = false;
 
-    async function createChart() {
+    async function createChart(data, year) {
         //first get rid of previous chart
         d3.select(svg).selectAll("*").remove();
 
@@ -24,7 +25,7 @@
         const congressNumberThatYear = Math.ceil((year - 1788) / 2);
 
         //get all data from that year's congress
-        const data = await d3.json(`/public/data/by_congress/${congressNumberThatYear}.json`);
+        // const data = await d3.json(`/public/data/by_congress/${congressNumberThatYear}.json`);
         //get members from specified year
         const houseFilteredData = getMembersFromYear("House of Representatives", year, data);
         const senateFilteredData = getMembersFromYear("Senate", year, data)
@@ -56,9 +57,6 @@
             const averageYears = bin.length === 0 ? 0 : Math.round(totalYears / bin.length);
             senateYearsServedAverages.push(averageYears)
         })
-
-        console.log(houseYearsServedAverages)
-        console.log(senateYearsServedAverages)
 
         //set names of each bin
         const xLabels = houseBins.map((d, i) => {
@@ -168,14 +166,14 @@
             .attr("width", x.bandwidth() / 3)
     }
 
-    let mounted = false;
-
     onMount(() => {
-        createChart();
         mounted = true;
     })
 
-    $: if (mounted && year) {
+    $: if (mounted && $congressData && $selectedYear) {
+        createChart($congressData, $selectedYear);
+    } else if (mounted && $selectedYear) {
+        loadYear($selectedYear);
         createChart();
     }
 
