@@ -28,6 +28,3 @@
         <option value={option}>{option}</option>
     {/each}
 </select>
-
-<AgeComparisonChart chamber={"Senate"} />
-<AgeComparisonChart chamber={"House of Representatives"} />

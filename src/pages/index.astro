@@ -5,7 +5,6 @@ import AgeComparisonGraph from '../components/AgeComparisonGraph.svelte';
 import YearsServedGraph from '../components/YearsServedGraph.svelte';
 import Footer from '../components/Footer.svelte';
 import '../styles/style.css';
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 import AgeComparisonChart from '../components/AgeComparisonChart.svelte'
 import YearDropdown from "../components/YearDropdown.svelte";
@@ -19,6 +18,8 @@ import YearDropdown from "../components/YearDropdown.svelte";
 	<h1>Politicians</h1>
 	<h3>With Age Comes With Experience</h3>
 
+	<YearDropdown client:load />
+
 	<div class="meicycle-wrapper">
       <Meicycle
         rows={[21,19,17,15,13,11,9]}
@@ -29,23 +30,10 @@ import YearDropdown from "../components/YearDropdown.svelte";
     </div>
 
 	<br></br>
-	<p>Good old explanation test and whatnot.</p>
-	<br></br>
 
-    <section class="graph">
-      <h2>Age Distribution</h2><br>
-      <AgeComparisonGraph client:load />
-    </section>
-	<br></br>
-	Super epic, awesome, cool, regal text e
-
-    <section class="graph">
-      <h2>Years Served by Age</h2>
-      <YearsServedGraph client:load />
-    </section>
+  <AgeComparisonChart chamber={"Senate"} client:load/>
+  <AgeComparisonChart chamber={"House of Representatives"} client:load/>
 
 	<Footer />
-	<h1>D3 + Svelte + Astro being used!</h1>
-	<YearDropdown client:load/>
 </body>
 </html>

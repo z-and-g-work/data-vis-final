@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import * as d3 from 'd3';
-  import { getMembersFromYear } from '../../shared/getmembers.js';
+  import { getMembersFromYear } from './../shared/getmembers.js';
 
   let container;
 
