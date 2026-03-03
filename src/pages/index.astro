@@ -5,6 +5,10 @@ import AgeComparisonGraph from '../components/AgeComparisonGraph.svelte';
 import YearsServedGraph from '../components/YearsServedGraph.svelte';
 import Footer from '../components/Footer.svelte';
 import '../styles/style.css';
+import Welcome from '../components/Welcome.astro';
+import Layout from '../layouts/Layout.astro';
+import AgeComparisonChart from '../components/AgeComparisonChart.svelte'
+import YearDropdown from "../components/YearDropdown.svelte";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -41,5 +45,7 @@ import '../styles/style.css';
     </section>
 
 	<Footer />
+	<h1>D3 + Svelte + Astro being used!</h1>
+	<YearDropdown client:load/>
 </body>
 </html>

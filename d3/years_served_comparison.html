@@ -16,40 +16,51 @@
 
     //todo: get this data from somewhere else
     const year = 2024;
-    const chamber = "Both"
+    const chamber = "House of Representatives"
 
     //get all data
     const data = await d3.json("/public/data/members.json");
     //get members from specified year
-    const filteredData = getMembersFromYear(chamber, year, data);
+    const houseFilteredData = getMembersFromYear("House of Representatives", year, data);
+    const senateFilteredData = getMembersFromYear("Senate", year, data)
     //get the years members served in each chamber
-    const yearsServed = getYearsServed(year, filteredData);
+    const houseYearsServed = getYearsServed(year, houseFilteredData);
+    const senateYearsServed = getYearsServed(year, senateFilteredData);
 
     //sort members into bins based on age
     const bin = d3.bin().domain([25, 110]).thresholds([31, 41, 51, 61, 71, 81]).value(d => d[1]);
-    const bins = bin(yearsServed);
+    const houseBins = bin(houseYearsServed);
+    const senateBins = bin(senateYearsServed);
 
     //get average years served for each bin to use in chart
-    const yearsServedAverages = [];
-    bins.forEach(bin => {
-        let totalYearsHouse = 0;
-        let totalYearsSenate = 0;
+    const houseYearsServedAverages = [];
+    const senateYearsServedAverages = [];
+    houseBins.forEach(bin => {
+        let totalYears = 0;
         bin.forEach(member => {
-            totalYearsHouse += member[2];
-            totalYearsSenate += member[3];
+            totalYears += member[2] + member[3];
         })
-
-        const averageYearsHouse = bin.length === 0 ? 0 : Math.round(totalYearsHouse / bin.length);
-        const averageYearsSenate = bin.length === 0 ? 0 : Math.round(totalYearsSenate / bin.length);
-        yearsServedAverages.push([averageYearsHouse, averageYearsSenate])
+        const averageYears = bin.length === 0 ? 0 : Math.round(totalYears / bin.length);
+        houseYearsServedAverages.push(averageYears)
+    })
+    senateBins.forEach(bin => {
+        let totalYears = 0;
+        bin.forEach(member => {
+            totalYears += member[2] + member[3];
+        })
+        const averageYears = bin.length === 0 ? 0 : Math.round(totalYears / bin.length);
+        senateYearsServedAverages.push(averageYears)
     })
 
+    console.log(houseYearsServedAverages)
+    console.log(senateYearsServedAverages)
+
     //set names of each bin
-    const xLabels = bins.map((d, i) => {
+    const xLabels = houseBins.map((d, i) => {
         if (i === 0) {
             return "<= 31"
         }
-        else if (i === bins.length - 1) {
+        else if (i === houseBins.length - 1) {
             return "> 80"
         }
         else {
@@ -69,8 +80,8 @@
         .attr("height", height + 25);
 
     //create legend
-    const keys = ["Senate", "House of Representatives"];
-    const color = d3.scaleOrdinal().domain(keys).range(["#00b894", "#a29bfe"]);
+    const keys = ["House of Representatives", "Senate"];
+    const color = d3.scaleOrdinal().domain(keys).range(["#a29bfe", "#00b894"]);
     const iconSize = 20;
     svg.append("g")
         .selectAll("rect")
@@ -106,8 +117,8 @@
     svg.append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 20)
-        .attr("x", -height/2 - 35)
-        .text("Years Served")
+        .attr("x", -height/2 - 80)
+        .text("Years Served in Congress")
         .style("font-family", "Arial");
 
     //create x axis
@@ -124,27 +135,27 @@
     svg.append("g")
         .attr("fill", "#a29bfe")
         .selectAll()
-        .data(yearsServedAverages)
+        .data(houseYearsServedAverages)
         .join("rect")
-        .attr("x", (d, i) => x(xLabels[i]))
-        .attr("y", d => y(d[0]))
+        .attr("x", (d, i) => x(xLabels[i]) + x.bandwidth() / 6)
+        .attr("y", d => y(d))
         .attr("stroke", "black")
         .attr("stroke-width", 1)
-        .attr("height", d => y(0) - y(d[0]))
-        .attr("width", x.bandwidth())
+        .attr("height", d => y(0) - y(d))
+        .attr("width", x.bandwidth() / 3)
 
     //create each senate bar
     svg.append("g")
         .attr("fill", "#00b894")
         .selectAll()
-        .data(yearsServedAverages)
+        .data(senateYearsServedAverages)
         .join("rect")
-        .attr("x", (d, i) => x(xLabels[i]))
-        .attr("y", d => y(d[0] + d[1]))
+        .attr("x", (d, i) => x(xLabels[i]) + x.bandwidth() / 2)
+        .attr("y", d => y(d))
         .attr("stroke", "black")
         .attr("stroke-width", 1)
-        .attr("height", d => y(d[0]) - y(d[0] + d[1]))
-        .attr("width", x.bandwidth())
+        .attr("height", d => y(0) - y(d))
+        .attr("width", x.bandwidth() / 3)
 
     container.append(svg.node());
 
