@@ -1,0 +1,38 @@
+---
+import ManIcon from '../components/ManIcon.svelte';
+import Meicycle from '../components/Meicycle.svelte';
+import Footer from '../components/Footer.svelte';
+import '../styles/style.css';
+import AgeComparisonChart from '../components/AgeComparisonChart.svelte'
+import YearsServedChart from "../components/YearsServedChart.svelte";
+import YearDropdown from "../components/YearDropdown.svelte";
+
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<html>
+<body>
+	<h1>Politicians</h1>
+	<h3>With Age Comes With Experience</h3>
+	<YearDropdown client:load />
+
+
+
+	<div class="meicycle-wrapper">
+      <Meicycle client:load
+        rows={[25,23,21,19,17,15,13,11,9]}
+        width={1200}
+        rowHeight={260}
+        rowGap={-200}
+		client:load
+      />
+    </div>
+	<YearsServedChart client:load />
+	<br></br>
+	<AgeComparisonChart chamber={"House of Representatives"} client:load/>
+	<AgeComparisonChart chamber={"Senate"} client:load/>
+
+	<Footer />
+</body>
+</html>
