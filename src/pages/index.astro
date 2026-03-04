@@ -25,9 +25,10 @@ import YearDropdown from "../components/YearDropdown.svelte";
         width={900}
         rowHeight={260}
         rowGap={-200}
+		client:load
       />
     </div>
-	<YearsServedChart client:load />
+	<!--<YearsServedChart client:load />-->
 	<br></br>
   <AgeComparisonChart chamber={"Senate"} client:load/>
   <AgeComparisonChart chamber={"House of Representatives"} client:load/>

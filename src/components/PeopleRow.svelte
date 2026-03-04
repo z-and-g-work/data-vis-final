@@ -48,6 +48,24 @@
     .map((p, i) => ({ i, y: p.y }))
     .sort((a, b) => a.y - b.y)
     .map((o) => o.i);
+
+
+  let isHovered = null;
+
+  let placeholderAge = 72;
+  let placeholderHouse = 6;
+  let placeholderSenate = 20;
+
+  // function handleMouseOver(e){
+  //   console.log("HIIII");
+  //   isHovered = true;
+  // }
+  //
+  // function handleMouseOut(e){
+  //   console.log("BYEEE")
+  //   isHovered = null;
+  // }
+
 </script>
 
 <svg width={width} height={height} style="overflow:visible; display:block">
@@ -78,9 +96,27 @@
     pointer-events="none"
   />
 
+  <!--{#if isHovered !== null}-->
+  <!--  <foreignObject-->
+  <!--          x={positions[isHovered].x - 80}-->
+  <!--          y={positions[isHovered].y - iconBase * positions[isHovered].scale - 90}-->
+  <!--          width="160"-->
+  <!--          height="80"-->
+  <!--  >-->
+  <!--    <div xmlns="http://www.w3.org/1999/xhtml"-->
+  <!--         style="background:#333;color:white;padding:6px 10px;border-radius:6px;font-size:12px;text-align:center;">-->
+  <!--      Age: {placeholderAge}<br/>-->
+  <!--      Years served in House: {placeholderHouse}<br/>-->
+  <!--      Years served in Senate: {placeholderSenate}-->
+  <!--    </div>-->
+  <!--  </foreignObject>-->
+  <!--{/if}-->
+
   {#each drawOrder as idx}
     {#if positions[idx]}
-      <g>
+      <g
+              on:mouseenter={() => isHovered = idx}
+              on:mouseleave={() => isHovered = null}>
         <ManIcon
           part="head"
           size={iconBase * positions[idx].scale}
@@ -89,8 +125,18 @@
           hairColor={hairColor}
           shirtColor={shirtColor}
           skinColor={skinColor}
+          client:load
         />
       </g>
+    {/if}
+    {#if isHovered === idx}
+      <foreignObject x={positions[idx].x + 10}  y={positions[idx].y - 60} width="160" height="80">
+        <div style="background:#333;z-index:9999;color:white;padding:4px 8px;border-radius:4px;font-size:12px;text-align:center;">
+          Age: {placeholderAge}<br/>
+          Years served in House: {placeholderHouse}<br/>
+          Years served in Senate: {placeholderSenate}<br/>
+        </div>
+      </foreignObject>
     {/if}
   {/each}
 </svg>

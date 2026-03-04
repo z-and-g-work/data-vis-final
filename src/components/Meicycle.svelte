@@ -34,6 +34,7 @@
         hairColor={hairColor}
         shirtColor={shirtColor}
         skinColor={skinColor}
+        client:load
       />
     </g>
   {/each}
