@@ -3,25 +3,36 @@
     import AgeComparisonChart from "./AgeComparisonChart.svelte";
     import { getMembersFromYear } from "../shared/getmembers.js";
     import { selectedYear, congressData, loadYear } from "./../shared/dataManager.js";
+    import "../styles/timeline.css";
 
-    // initialize available years (1995-2024)
     let options = [];
-    for (let i = 1995; i < 2025; i++) options.push(i);
 
-    // fetch initial data on client mount (delayed to ensure SSR-safe)
-    onMount(async () => {
-        console.log('YearDropdown onMount: calling loadYear for initial year', $selectedYear);
-        awaitloadYear($selectedYear);
+    for (let i = 1995; i < 2025; i++) {
+        options.push(i)
+    }
+
+    let mounted = false;
+
+    onMount(() => {
+        mounted = true;
+        loadYear($selectedYear);
     });
+
+    $: if (mounted) loadYear($selectedYear);
 
 </script>
 
-<select value={$selectedYear} on:change={e => {
-        const yr = +e.target.value;
-        selectedYear.set(yr);
-        if (typeof window !== 'undefined') loadYear(yr);
-    }}>
-    {#each options as option}
-        <option value={option}>{option}</option>
-    {/each}
-</select>
+<div class="timeline-and-text-container">
+    <p> Currently { $selectedYear } : { $selectedYear % 2 ? '1st' : '2nd' } half of congress { Math.ceil(( $selectedYear - 1788) / 2)} </p>
+    <div class="timeline-container">
+        {#each options as option}
+            <button
+                type="button"
+                class:active={$selectedYear === option}
+                on:click={() => selectedYear.set(option)}
+            >
+                {option.toString().substring(2, 4)}
+            </button>
+        {/each}
+    </div>
+</div>
