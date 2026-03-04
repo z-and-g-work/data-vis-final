@@ -1,13 +1,22 @@
 <script>
   import ManIcon from './ManIcon.svelte';
   export let count = 7;
+  export let altinator = false;
+  // optional: array of person objects for this row. If provided, `count` will be derived
+  // from `people.length`. Each person object should include at least a `yob` property.
+  export let people = null;
+  // pass the year so this component can compute ages if needed
+  export let year = null;
   export let width = 800;
   export let height = 250;
   export let padding = 60;
   export let iconBase = 64;
-  export let hairColor = '#fdcb6e';
   export let shirtColor = '#ff7675';
   export let skinColor = '#74b9ff';
+
+  function testHairColorSet() {
+    altinator = !altinator;
+  }
 
   function quadPoint(t, p0, p1, p2) {
     return {
@@ -21,7 +30,11 @@
     const right = { x: width - padding, y: height - 20 };
     const mid = { x: width / 2, y: height - 160 };
     const pts = [];
-    if (n <= 1) {
+    if (n <= 0) {
+      return [];
+    }
+
+    if (n === 1) {
       pts.push(quadPoint(0.5, left, mid, right));
     } else {
       for (let i = 0; i < n; i++) {
@@ -41,7 +54,9 @@
     });
   }
 
-  $: positions = computePositions(count);
+  $: positions = computePositions(people && people.length ? people.length : count);
+
+  $: console.log('PeopleRow debug — count, peopleLength, positionsLength ->', count, people && people.length, positions.length);
 
   // draw back-to-front: smaller y (higher on screen) first, larger y (closer) later
   $: drawOrder = positions
@@ -77,9 +92,11 @@
           size={iconBase * positions[idx].scale}
           x={positions[idx].x - (iconBase * positions[idx].scale) / 2}
           y={positions[idx].y - iconBase * positions[idx].scale}
-          hairColor={hairColor}
+          hairColor={(idx + (altinator ? 1 : 0)) % 2 === 0 ? '#fdcb6e' : '#dfe6e9'}
           shirtColor={shirtColor}
           skinColor={skinColor}
+          yob={people && people[idx] ? people[idx].yob : null}
+          age={people && people[idx] && year ? year - people[idx].yob : null}
         />
       </g>
     {/if}
@@ -122,9 +139,11 @@
           size={iconBase * positions[idx].scale}
           x={positions[idx].x - (iconBase * positions[idx].scale) / 2}
           y={positions[idx].y - iconBase * positions[idx].scale}
-          hairColor={hairColor}
+          hairColor={(idx + (altinator ? 1 : 0)) % 2 === 0 ? '#fdcb6e' : '#dfe6e9'}
           shirtColor={shirtColor}
           skinColor={skinColor}
+          yob={people && people[idx] ? people[idx].yob : null}
+          age={people && people[idx] && year ? year - people[idx].yob : null}
           client:load
         />
       </g>

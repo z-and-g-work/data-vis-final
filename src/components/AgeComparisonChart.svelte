@@ -114,7 +114,6 @@
         createChart($congressData, $selectedYear);
     } else if (mounted && $selectedYear) {
         loadYear($selectedYear);
-        createChart();
     }
 
 </script>

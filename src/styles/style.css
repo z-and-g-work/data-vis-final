@@ -77,7 +77,8 @@ hr {
 }
 
 .meicycle-wrapper {
-  min-height: 100vh;
+  min-height: 60vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
