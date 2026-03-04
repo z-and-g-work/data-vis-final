@@ -5,6 +5,8 @@
     export let size = 40;
     // what part of the icon to render: "full", "body", or "head"
     export let part = "full";
+
+    // $: console.log('ManIcon debug ->', { yob, age, size, part });
 </script>
 
 <svg

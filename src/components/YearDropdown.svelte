@@ -4,26 +4,23 @@
     import { getMembersFromYear } from "../shared/getmembers.js";
     import { selectedYear, congressData, loadYear } from "./../shared/dataManager.js";
 
-    onMount(() => loadYear(2024));
-
+    // initialize available years (1995-2024)
     let options = [];
+    for (let i = 1995; i < 2025; i++) options.push(i);
 
-    for (let i = 1995; i < 2025; i++) {
-        options.push(i)
-    }
-
-    let mounted = false;
-
-    onMount(() => {
-        mounted = true;
-        loadYear($selectedYear);
+    // fetch initial data on client mount (delayed to ensure SSR-safe)
+    onMount(async () => {
+        console.log('YearDropdown onMount: calling loadYear for initial year', $selectedYear);
+        awaitloadYear($selectedYear);
     });
-
-    $: if (mounted) loadYear($selectedYear);
 
 </script>
 
-<select bind:value={ $selectedYear }>
+<select value={$selectedYear} on:change={e => {
+        const yr = +e.target.value;
+        selectedYear.set(yr);
+        if (typeof window !== 'undefined') loadYear(yr);
+    }}>
     {#each options as option}
         <option value={option}>{option}</option>
     {/each}
