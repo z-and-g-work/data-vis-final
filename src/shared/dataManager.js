@@ -14,7 +14,6 @@ if (typeof window !== 'undefined') {
 async function fetchYear(year) {
     const congressNumber = Math.ceil((year - 1788) / 2);
     if (cache[congressNumber]) {
-        // console.log("we found a cache");
         return cache[congressNumber]
     };
     const data = await d3.json(`/public/data/by_congress/${congressNumber}.json`);
