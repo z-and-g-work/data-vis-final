@@ -16,6 +16,8 @@
     onMount(() => {
         mounted = true;
         loadYear($selectedYear);
+
+
     });
 
     $: if (mounted) loadYear($selectedYear);
@@ -26,7 +28,7 @@
     <p> Currently { $selectedYear } : { $selectedYear % 2 ? '1st' : '2nd' } half of congress { Math.ceil(( $selectedYear - 1788) / 2)} </p>
     <div class="timeline-container">
         {#each options as option}
-            <button 
+            <button
                 type="button"
                 class:active={$selectedYear === option}
                 on:click={() => selectedYear.set(option)}

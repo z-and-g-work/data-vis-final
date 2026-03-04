@@ -1,0 +1,33 @@
+.man-info {
+    display: none;
+    position: absolute;
+    background: white;
+    border: 1px;
+    pointer-events: none;
+    position: fixed;
+    z-index: 9999;
+}
+
+.man-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.man-icon:hover .man-info{
+    display: block;
+}
+
+.tooltip {
+    position: fixed;
+    pointer-events: none; /* Crucial: mouse ignores the tooltip */
+    background: #333;
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    z-index: 1000;
+}
+
+.container {
+    position: relative;
+    display: inline-block;
+}

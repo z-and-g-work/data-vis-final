@@ -15,21 +15,23 @@ import YearDropdown from "../components/YearDropdown.svelte";
 <body>
 	<h1>Politicians</h1>
 	<h3>With Age Comes With Experience</h3>
-
 	<YearDropdown client:load />
 
+
+
 	<div class="meicycle-wrapper">
-      <Meicycle
-        rows={[21,19,17,15,13,11,9]}
-        width={900}
+      <Meicycle client:load
+        rows={[25,23,21,19,17,15,13,11,9]}
+        width={1200}
         rowHeight={260}
         rowGap={-200}
+		client:load
       />
     </div>
 	<YearsServedChart client:load />
 	<br></br>
-  <AgeComparisonChart chamber={"Senate"} client:load/>
-  <AgeComparisonChart chamber={"House of Representatives"} client:load/>
+	<AgeComparisonChart chamber={"House of Representatives"} client:load/>
+	<AgeComparisonChart chamber={"Senate"} client:load/>
 
 	<Footer />
 </body>
