@@ -1,0 +1,50 @@
+.timeline-and-text-container {
+    width: 100%;
+    /* margin: 0 5%; */
+    height: 60px;
+
+    position: sticky;
+    top: 0; /* Stick to the top edge of the viewport */
+}
+
+.timeline-and-text-container p {
+    background-color: var(--background);
+    text-align: center;
+    margin: 0;
+}
+
+
+.timeline-container {
+    width: 100%;
+    border: 1.5px solid black;
+    display: flex;
+    align-items: stretch;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.timeline-container button {
+    flex: 1;
+    height: 100%;
+    border: none;
+    border-right: 1px solid #ccc;
+    background-color: white;
+    color: #333;
+    font-size: 0.7rem;
+    cursor: pointer;
+    padding: 0;
+}
+
+.timeline-container button:last-child {
+    border-right: none;    /* remove divider on last button */
+}
+
+.timeline-container button:hover {
+    background-color: #e5e7eb;
+}
+
+.timeline-container button.active {
+    background-color: var(--text-subtitle);
+    color: white;
+}
