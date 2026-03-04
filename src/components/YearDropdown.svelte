@@ -16,6 +16,8 @@
     onMount(() => {
         mounted = true;
         loadYear($selectedYear);
+
+
     });
 
     $: if (mounted) loadYear($selectedYear);

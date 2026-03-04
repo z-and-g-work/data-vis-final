@@ -27,6 +27,7 @@ export async function loadYear(year) {
     console.log('loadYear: about to set congressData to', Array.isArray(data) ? 'array-' + data.length : data);
     congressData.set(data);
 
-    fetchYear(year - 1);
-    fetchYear(year + 1);
+    for (let i = 1995; i < 2025; i++) {
+        fetchYear(i);
+    }
 }

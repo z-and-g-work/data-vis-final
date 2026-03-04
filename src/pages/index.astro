@@ -15,6 +15,7 @@ import YearDropdown from "../components/YearDropdown.svelte";
 <body>
 	<h1>Politicians</h1>
 	<h3>With Age Comes With Experience</h3>
+	<YearDropdown client:load />
 
 
 
@@ -31,7 +32,6 @@ import YearDropdown from "../components/YearDropdown.svelte";
 	<br></br>
 	<AgeComparisonChart chamber={"House of Representatives"} client:load/>
 	<AgeComparisonChart chamber={"Senate"} client:load/>
-	<YearDropdown client:load />
 
 	<Footer />
 </body>
