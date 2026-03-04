@@ -1,6 +1,7 @@
 <script>
   import ManIcon from './ManIcon.svelte';
   export let count = 7;
+  export let altinator = false;
   // optional: array of person objects for this row. If provided, `count` will be derived
   // from `people.length`. Each person object should include at least a `yob` property.
   export let people = null;
@@ -10,9 +11,12 @@
   export let height = 250;
   export let padding = 60;
   export let iconBase = 64;
-  export let hairColor = '#fdcb6e';
   export let shirtColor = '#ff7675';
   export let skinColor = '#74b9ff';
+
+  function testHairColorSet() {
+    altinator = !altinator;
+  }
 
   function quadPoint(t, p0, p1, p2) {
     return {
@@ -70,7 +74,7 @@
           size={iconBase * positions[idx].scale}
           x={positions[idx].x - (iconBase * positions[idx].scale) / 2}
           y={positions[idx].y - iconBase * positions[idx].scale}
-          hairColor={hairColor}
+          hairColor={(idx + (altinator ? 1 : 0)) % 2 === 0 ? '#fdcb6e' : '#dfe6e9'}
           shirtColor={shirtColor}
           skinColor={skinColor}
           yob={people && people[idx] ? people[idx].yob : null}
@@ -99,7 +103,7 @@
           size={iconBase * positions[idx].scale}
           x={positions[idx].x - (iconBase * positions[idx].scale) / 2}
           y={positions[idx].y - iconBase * positions[idx].scale}
-          hairColor={hairColor}
+          hairColor={(idx + (altinator ? 1 : 0)) % 2 === 0 ? '#fdcb6e' : '#dfe6e9'}
           shirtColor={shirtColor}
           skinColor={skinColor}
           yob={people && people[idx] ? people[idx].yob : null}
