@@ -11,6 +11,11 @@
     let mounted = false;
 
     async function createChart(data, year) {
+        if (!data || !year) {
+            console.log("data or year is null or undefined");
+            return;
+        };
+
         //first get rid of previous chart
         d3.select(svg).selectAll("*").remove();
 
@@ -61,7 +66,7 @@
         //set names of each bin
         const xLabels = houseBins.map((d, i) => {
             if (i === 0) {
-                return "<= 31"
+                return "25-30"
             } else if (i === houseBins.length - 1) {
                 return "> 80"
             } else {

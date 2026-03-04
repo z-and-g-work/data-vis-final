@@ -130,7 +130,7 @@
       </g>
     {/if}
     {#if isHovered === idx}
-      <foreignObject x={positions[idx].x + 10}  y={positions[idx].y - 60} width="160" height="80">
+      <foreignObject x={positions[idx].x + 10}  y={positions[idx].y - 10} width="160" height="80">
         <div style="background:#333;z-index:9999;color:white;padding:4px 8px;border-radius:4px;font-size:12px;text-align:center;">
           Age: {placeholderAge}<br/>
           Years served in House: {placeholderHouse}<br/>

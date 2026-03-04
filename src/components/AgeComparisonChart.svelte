@@ -46,7 +46,7 @@
         //set names of each bin
         const xLabels = bins.map((d, i) => {
             if (i === 0) {
-                return "<= 31"
+                return "25-30"
             }
             else if (i === bins.length - 1) {
                 return "> 80"
