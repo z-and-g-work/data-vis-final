@@ -14,21 +14,12 @@ async function fetchYear(year) {
     }
     const congressNumber = Math.ceil((year - 1788) / 2);
     if (cache[congressNumber]) {
-        console.log('fetchYear: using cache for congress', congressNumber);
-        return cache[congressNumber];
-    }
-    const url = `/data/min_by_congress/${congressNumber}.json`;
-    console.log('fetchYear: fetching', url);
-    try {
-        const data = await d3.json(url);
-        console.log('fetchYear: success! length:', Array.isArray(data) ? data.length : 'not-array');
-        cache[congressNumber] = data;
-        return data;
-    } catch (err) {
-        console.error('fetchYear: fetch failed for', url, err);
-        return null;
-    }
-}
+        return cache[congressNumber]
+    };
+    const data = await d3.json(`/public/data/by_congress/${congressNumber}.json`);
+    cache[congressNumber] = data;
+    return data;
+};
 
 export async function loadYear(year) {
     console.log('loadYear called with', year);
