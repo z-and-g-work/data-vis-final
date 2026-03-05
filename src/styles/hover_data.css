@@ -1,11 +1,12 @@
 .man-info {
     display: none;
-    position: absolute;
-    background: white;
-    border: 1px;
-    pointer-events: none;
     position: fixed;
+    background: white;
+    border: 1px solid #c8a96e; /* warm parchment-tone border to match theme */
+    pointer-events: none;
     z-index: 9999;
+    /* EB Garamond for tooltip body text — matches the blurb/body style */
+    font-family: var(--font-body);
 }
 
 .man-icon {
@@ -13,18 +14,21 @@
     display: inline-block;
 }
 
-.man-icon:hover .man-info{
+.man-icon:hover .man-info {
     display: block;
 }
 
 .tooltip {
     position: fixed;
-    pointer-events: none; /* Crucial: mouse ignores the tooltip */
-    background: #333;
-    color: white;
-    padding: 8px;
-    border-radius: 4px;
+    pointer-events: none;
+    background: #2d2417;
+    color: #f5e6c8;
+    padding: 8px 10px;
+    border-radius: 3px;
     z-index: 1000;
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    line-height: 1.4;
 }
 
 .container {
