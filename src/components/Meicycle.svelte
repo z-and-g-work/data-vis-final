@@ -18,15 +18,10 @@
   export let padding = 30; // passed through to PeopleRow
 
   let yearsServed = [];
-  console.log("Congress Data: ", $congressData);
   $: yearsServed = $congressData ? getYearsServed($selectedYear, $congressData) : [];
-  console.log(yearsServed);
   // list of people (both chambers) for the selected year
   $: peopleList = $congressData ? getMembersFromYear("Both", $selectedYear, $congressData) : [];
-  console.log(peopleList);
-  console.log("Selected year:", $selectedYear);
   $: totalPeople = peopleList.length;
-  console.log("Total people for selected year:", totalPeople);
 
   function computeRowCounts(total, rcount) {
     if (rcount <= 0) return [];
@@ -41,8 +36,8 @@
       // odd: center row = base; above center add 3 per step; below subtract 3 per step
       const ci = Math.floor(rcount / 2);
       counts[ci] = base;
-      for (let i = ci - 1; i >= 0; i--) counts[i] = counts[i + 1] + 3;
-      for (let i = ci + 1; i < rcount; i++) counts[i] = counts[i - 1] - 3;
+      for (let i = ci - 1; i >= 0; i--) counts[i] = counts[i + 1] + 1;
+      for (let i = ci + 1; i < rcount; i++) counts[i] = counts[i - 1] - 1;
       // add remainder to furthest back row (index 0)
       counts[0] += remainder;
     } else {
@@ -52,9 +47,9 @@
       counts[upperCenter] = Math.ceil(avg);
       counts[lowerCenter] = Math.floor(avg);
       // propagate up (towards back, decreasing index) adding 3
-      for (let i = upperCenter - 1; i >= 0; i--) counts[i] = counts[i + 1] + 3;
+      for (let i = upperCenter - 1; i >= 0; i--) counts[i] = counts[i + 1] + 1;
       // propagate down (towards front, increasing index) subtracting 3
-      for (let i = lowerCenter + 1; i < rcount; i++) counts[i] = counts[i - 1] - 3;
+      for (let i = lowerCenter + 1; i < rcount; i++) counts[i] = counts[i - 1] - 1;
       counts[0] += remainder;
     }
 
@@ -87,13 +82,13 @@
   })();
 
   // Debug logs to help trace updates
-  $: console.log('Meicycle debug — selectedYear, totalPeople, numRows ->', $selectedYear, totalPeople, numRows);
-  $: console.log('Meicycle debug — computedRowCounts ->', computedRowCounts);
-  $: console.log('Meicycle debug — rowsPeople lengths ->', rowsPeople.map(r => r.length));
-  $: console.log('Meicycle debug — $congressData ->', $congressData);
-  console.log("Here comes the years served for the selected year:");
-  console.log(yearsServed);
-  console.log("Years served log ends here.");
+  // $: console.log('Meicycle debug — selectedYear, totalPeople, numRows ->', $selectedYear, totalPeople, numRows);
+  // $: console.log('Meicycle debug — computedRowCounts ->', computedRowCounts);
+  // $: console.log('Meicycle debug — rowsPeople lengths ->', rowsPeople.map(r => r.length));
+  // $: console.log('Meicycle debug — $congressData ->', $congressData);
+  // console.log("Here comes the years served for the selected year:");
+  // console.log(yearsServed);
+  // console.log("Years served log ends here.");
 
   // parse thru the arrays 
 
@@ -105,8 +100,6 @@
   style="overflow:visible; display:block; width:100%; height:auto;"
 >
 <!-- <path stroke="rgba(1,1,1,1)" stroke-linecap="miter" stroke-linejoin="miter" fill="none" pointer-events="none" d="M 10 240 Q 600 140 1190 240" stroke-width="76.8"></path> -->
-  <!-- <path stroke="rgba(68,33,20,1)" stroke-linecap="miter" stroke-linejoin="miter" fill="none" pointer-events="none" d="M 0 205 Q 600 105 1200 205" stroke-width="76.8"></path> -->
-  <!-- <path stroke="rgba(68,33,20,1)" stroke-linecap="miter" stroke-linejoin="miter" fill="none" pointer-events="none" d="M 40 205 Q 600 105 1160 205" stroke-width="76.8"></path> -->
 
   {#each rowsPeople as peopleRow, i}
     <g transform={`translate(0, ${i * (rowHeight + rowGap)})`}>
@@ -118,10 +111,10 @@
         height={rowHeight}
         iconBase={iconBase}
         padding={padding + i * 15}
-        client:load
+        // client:load
       />
     </g>
   {/each}
-    <!-- <path stroke="rgba(68,33,20,1)" stroke-linecap="miter" stroke-linejoin="miter" fill="none" pointer-events="none" d="M 40 240 Q 600 140 1160 240" stroke-width="76.8"></path> -->
+
 
 </svg>

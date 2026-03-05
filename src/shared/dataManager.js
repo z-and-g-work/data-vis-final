@@ -22,9 +22,9 @@ async function fetchYear(year) {
 };
 
 export async function loadYear(year) {
-    console.log('loadYear called with', year);
+    // console.log('loadYear called with', year);
     const data = await fetchYear(year);
-    console.log('loadYear: about to set congressData to', Array.isArray(data) ? 'array-' + data.length : data);
+    // console.log('loadYear: about to set congressData to', Array.isArray(data) ? 'array-' + data.length : data);
     congressData.set(data);
 
     for (let i = 1995; i < 2025; i++) {

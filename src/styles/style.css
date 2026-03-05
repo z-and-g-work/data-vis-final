@@ -5,6 +5,7 @@
   --text-primary: #2d3436;
   --text-title: #d63031;
   --text-subtitle: #d63031;
+  /* --text-subtitle: #e1d232; */
 
   --font-heading: 'IM Fell English', Georgia, serif;
   --font-subheading: 'Cormorant Garamond', Georgia, serif;
@@ -91,7 +92,7 @@ footer {
 }
 
 .meicycle-wrapper svg {
-  margin-top: 50px;
+  margin-top: -30px;
 }
 
 .chart {

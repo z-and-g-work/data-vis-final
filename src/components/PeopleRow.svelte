@@ -14,6 +14,7 @@
   export let iconBase = 64;
   export let shirtColor = '#ff7675';
   export let skinColor = '#74b9ff';
+  // export let skinColor = 'rgb(116,185,255,1)';
   export let skinColorSelected = '#bf392f';
 
   function testHairColorSet() {
@@ -26,7 +27,7 @@
     // const start = { r: 0x8b, g: 0x3a, b: 0x3a }; // auburn
     const end = { r: 0xf5, g: 0xf5, b: 0xf5 }; // black / brown pairing
     // const end = { r: 0xe8, g: 0xe8, b: 0xe8 }; // auburn pairing
-    console.log("something is here");
+
     if (age <= 30) {
       return `rgb(${start.r}, ${start.g}, ${start.b})`;
     } 
@@ -37,10 +38,6 @@
     const r = Math.round(start.r + (end.r - start.r) * ((age - 30) / 50));
     const g = Math.round(start.g + (end.g - start.g) * ((age - 30) / 50));
     const b = Math.round(start.b + (end.b - start.b) * ((age - 30) / 50));
-
-    console.log('this is a thing');
-    console.log(age);
-    console.log(`rgb(${r}, ${g}, ${b})`);
 
     return `rgb(${r}, ${g}, ${b})`;
   }
@@ -62,28 +59,32 @@
     }
 
     if (n === 1) {
-      pts.push(quadPoint(0.5, left, mid, right));
+      pts.push({ ...quadPoint(0.5, left, mid, right), t: 0.5 });
     } else {
       for (let i = 0; i < n; i++) {
         const t = i / (n - 1);
-        pts.push(quadPoint(t, left, mid, right));
+        pts.push({ ...quadPoint(t, left, mid, right), t});
       }
     }
 
-    const ys = pts.map((p) => p.y);
-    const minY = Math.min(...ys);
-    const maxY = Math.max(...ys);
-
     return pts.map((p) => {
+      const ys = pts.map((p) => p.y);
+      const minY = Math.min(...ys);
+      const maxY = Math.max(...ys);
       const norm = (p.y - minY) / (maxY - minY || 1);
       const scale = 1.0 + norm * 0.2; // range ~0.6..1.2
-      return { ...p, scale };
+      
+      const tx = 2 * (1 - p.t) * (mid.x - left.x) + 2 * p.t * (right.x - mid.x);
+      const ty = 2 * (1 - p.t) * (mid.y - left.y) + 2 * p.t * (right.y - mid.y);
+      const angle = Math.atan2(ty, tx)
+
+      return { ...p, scale, angle };
     });
   }
 
   $: positions = computePositions(people && people.length ? people.length : count);
 
-  $: console.log('PeopleRow debug — count, peopleLength, positionsLength ->', count, people && people.length, positions.length);
+  // $: console.log('PeopleRow debug — count, peopleLength, positionsLength ->', count, people && people.length, positions.length);
 
   // draw back-to-front: smaller y (higher on screen) first, larger y (closer) later
   $: drawOrder = positions
@@ -94,28 +95,64 @@
 
   let isHovered = null;
 
-  let placeholderAge = 72;
-  let placeholderHouse = 6;
-  let placeholderSenate = 20;
-
 </script>
 
-<svg width={width} height={height} style="overflow:visible;display:block">
+<svg width={width} height={height} style="overflow:visible;">
+  <defs>
+    <filter id="dropShadow" x="0" y="0" width="200%" height="200%">
+        <feDropShadow dx="5" dy="5" stdDeviation="4" flood-color="black" flood-opacity="0.5" />
+    </filter>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="4" />
+    </filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="6" />
+    </filter>
+  </defs>
 
   <!-- thick quad ribbon overlay in front of the row to create a "stage" and cover bottom corners -->
   <path
-    d={`M ${padding - 20} ${height - 60} Q ${width / 2} ${height - 190} ${width - padding +20} ${height - 60}`}
-    stroke="rgba(68,33,20,.93)"
-    stroke-width={iconBase * 1.2}
+    d={`M ${padding - 20} ${height - 60} Q ${width / 2} ${height - 200} ${width - padding +20} ${height - 60}`}
+    // stroke="#9a5e0b"
+    stroke="rgba(158,94,12)"
+    // stroke="rgba(68,33,20,.9)"
+    stroke-width={iconBase * .75}
     stroke-linecap="miter"
     stroke-linejoin="miter"
     fill="none"
     pointer-events="none"
   />
+
+<!-- thin black line for depth -->
+  <path
+    d={`M ${padding - 25.2} ${height - 55 - iconBase * .6 + 11.5} Q ${width / 2} ${height - 190 - iconBase * .6 + 5} ${width - padding + 25.2} ${height - 55 - iconBase * .6 + 11.5}`}
+    // stroke="#9a5e0b"
+    // stroke="black"
+    stroke="rgba(0,0,0,.3)"
+    stroke-width={3}
+    stroke-linecap="miter"
+    stroke-linejoin="miter"
+    fill="none"
+    pointer-events="none"
+  />
+
+  <!-- yellow glow -->
+
+  <path
+    d={`M ${padding - 10} ${height - 55 - iconBase * .6 + 30} Q ${width / 2} ${height - 190 - iconBase * .6 + 30} ${width - padding + 10} ${height - 55 - iconBase * .6 + 30}`}
+    stroke="#ffff00"
+    stroke-width={5}
+    stroke-linecap="miter"
+    stroke-linejoin="miter"
+    fill="none"
+    pointer-events="none"
+    filter="url(#glow)"
+  />
   
   {#each drawOrder as idx}
     {#if positions[idx]}
       <g
+              role="group" // just to avoid the yellow squigs
               on:mouseenter={() => isHovered = idx}
               on:mouseleave={() => isHovered = null}>
         <ManIcon
@@ -128,7 +165,7 @@
           skinColor={isHovered === idx ? skinColorSelected : skinColor}
           yob={people && people[idx] ? people[idx].yob : null}
           age={people && people[idx] && year ? year - people[idx].yob : null}
-          client:load
+          tilt={positions[idx].angle}
         />
       </g>
     {/if}
