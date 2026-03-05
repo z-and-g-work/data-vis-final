@@ -20,6 +20,31 @@
     altinator = !altinator;
   }
 
+  function scaleColor(age) {
+    const start = { r: 0x1a, g: 0x1a, b: 0x1a }; // black
+    // const start = { r: 0x3e, g: 0x27, b: 0x23 }; // brown
+    // const start = { r: 0x8b, g: 0x3a, b: 0x3a }; // auburn
+    const end = { r: 0xf5, g: 0xf5, b: 0xf5 }; // black / brown pairing
+    // const end = { r: 0xe8, g: 0xe8, b: 0xe8 }; // auburn pairing
+    console.log("something is here");
+    if (age <= 30) {
+      return `rgb(${start.r}, ${start.g}, ${start.b})`;
+    } 
+    else if (age >= 80) {
+      return `rgb(${end.r}, ${end.g}, ${end.b})`;
+    }
+    
+    const r = Math.round(start.r + (end.r - start.r) * ((age - 30) / 50));
+    const g = Math.round(start.g + (end.g - start.g) * ((age - 30) / 50));
+    const b = Math.round(start.b + (end.b - start.b) * ((age - 30) / 50));
+
+    console.log('this is a thing');
+    console.log(age);
+    console.log(`rgb(${r}, ${g}, ${b})`);
+
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+
   function quadPoint(t, p0, p1, p2) {
     return {
       x: (1 - t) * (1 - t) * p0.x + 2 * (1 - t) * t * p1.x + t * t * p2.x,
@@ -51,7 +76,7 @@
 
     return pts.map((p) => {
       const norm = (p.y - minY) / (maxY - minY || 1);
-      const scale = 0.6 + norm * 0.6; // range ~0.6..1.2
+      const scale = 1.0 + norm * 0.2; // range ~0.6..1.2
       return { ...p, scale };
     });
   }
@@ -75,29 +100,12 @@
 
 </script>
 
-<svg width={width} height={height} style="display:block">
-  {#each drawOrder as idx}
-    {#if positions[idx]}
-      <g>
-        <ManIcon
-          part="body"
-          size={iconBase * positions[idx].scale}
-          x={positions[idx].x - (iconBase * positions[idx].scale) / 2}
-          y={positions[idx].y - iconBase * positions[idx].scale}
-          hairColor={(idx + (altinator ? 1 : 0)) % 2 === 0 ? '#fdcb6e' : '#dfe6e9'}
-          shirtColor={shirtColor}
-          skinColor={skinColor}
-          yob={people && people[idx] ? people[idx].yob : null}
-          age={people && people[idx] && year ? year - people[idx].yob : null}
-        />
-      </g>
-    {/if}
-  {/each}
+<svg width={width} height={height} style="overflow:visible;display:block">
 
   <!-- thick quad ribbon overlay in front of the row to create a "stage" and cover bottom corners -->
   <path
-    d={`M ${padding - 20} ${height - 20} Q ${width / 2} ${height - 120} ${width - padding +20} ${height - 20}`}
-    stroke="rgba(0,0,0,0.8)"
+    d={`M ${padding - 20} ${height - 60} Q ${width / 2} ${height - 190} ${width - padding +20} ${height - 60}`}
+    stroke="rgba(68,33,20,.93)"
     stroke-width={iconBase * 1.2}
     stroke-linecap="miter"
     stroke-linejoin="miter"
@@ -115,7 +123,7 @@
           size={iconBase * positions[idx].scale}
           x={positions[idx].x - (iconBase * positions[idx].scale) / 2}
           y={positions[idx].y - iconBase * positions[idx].scale}
-          hairColor={(idx + (altinator ? 1 : 0)) % 2 === 0 ? '#fdcb6e' : '#dfe6e9'}
+          hairColor={scaleColor(year - people[idx].yob)}
           shirtColor={shirtColor}
           skinColor={isHovered === idx ? skinColorSelected : skinColor}
           yob={people && people[idx] ? people[idx].yob : null}
@@ -126,12 +134,12 @@
     {/if}
     {#if isHovered === idx}
       {@const hoverWidth = 160}
-      {@const hoverHeight = 80}
-      {@const x = Math.min(Math.max(positions[idx].x - hoverWidth / 2, 60), width - (hoverHeight + 140))}
-      {@const y = positions[idx].y - 120 - Math.abs(positions[idx].x - (width - 40) / 2) * .05  }
+      {@const hoverHeight = 100}
+      {@const x = Math.min(Math.max(positions[idx].x - hoverWidth / 2, 20), width - (hoverHeight + 80))}
+      {@const y = positions[idx].y - 140 - Math.abs(positions[idx].x - (width - 40) / 2) * .05  }
       {@const yearsServed = getMembersYearsServed(year, people[idx])}
       <foreignObject x={x}  y={y} width={hoverWidth} height={hoverHeight} pointer-events="none">
-        <div style="background:#333;z-index:9999;color:white;padding:4px 8px;border-radius:4px;font-size:20px;text-align:center;">
+        <div style="overflow:visible;background:#333;z-index:9999;color:white;padding:4px 8px;border-radius:4px;font-size:20px;text-align:center;">
           Age: {people && people[idx] ? year - people[idx].yob : null}<br/>
           House: {yearsServed.house} yrs<br/>
           Senate: {yearsServed.senate} yrs<br/>

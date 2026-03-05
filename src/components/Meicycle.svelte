@@ -13,12 +13,9 @@
   export let numRows = rows.length;
   export let width = 900;
   export let rowHeight = 220;
-  export let rowGap = 30; // vertical space between rows
+  export let rowGap = 10; // vertical space between rows
   export let iconBase = 64;
-  export let hairColor = '#fdcb6e';
-  export let shirtColor = '#ff7675';
-  export let skinColor = '#74b9ff';
-  export let padding = 60; // passed through to PeopleRow
+  export let padding = 30; // passed through to PeopleRow
 
   let yearsServed = [];
   console.log("Congress Data: ", $congressData);
@@ -105,8 +102,12 @@
 <svg
   viewBox={`0 0 ${width} ${rowsPeople.length * rowHeight + (rowsPeople.length - 1) * rowGap}`}
   preserveAspectRatio="xMidYMid meet"
-  style="display:block; width:100%; height:auto;"
+  style="overflow:visible; display:block; width:100%; height:auto;"
 >
+<!-- <path stroke="rgba(1,1,1,1)" stroke-linecap="miter" stroke-linejoin="miter" fill="none" pointer-events="none" d="M 10 240 Q 600 140 1190 240" stroke-width="76.8"></path> -->
+  <!-- <path stroke="rgba(68,33,20,1)" stroke-linecap="miter" stroke-linejoin="miter" fill="none" pointer-events="none" d="M 0 205 Q 600 105 1200 205" stroke-width="76.8"></path> -->
+  <!-- <path stroke="rgba(68,33,20,1)" stroke-linecap="miter" stroke-linejoin="miter" fill="none" pointer-events="none" d="M 40 205 Q 600 105 1160 205" stroke-width="76.8"></path> -->
+
   {#each rowsPeople as peopleRow, i}
     <g transform={`translate(0, ${i * (rowHeight + rowGap)})`}>
       <PeopleRow
@@ -116,12 +117,11 @@
         width={width}
         height={rowHeight}
         iconBase={iconBase}
-        padding={padding}
-        hairColor={hairColor}
-        shirtColor={shirtColor}
-        skinColor={skinColor}
+        padding={padding + i * 15}
         client:load
       />
     </g>
   {/each}
+    <!-- <path stroke="rgba(68,33,20,1)" stroke-linecap="miter" stroke-linejoin="miter" fill="none" pointer-events="none" d="M 40 240 Q 600 140 1160 240" stroke-width="76.8"></path> -->
+
 </svg>

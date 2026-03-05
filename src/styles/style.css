@@ -12,6 +12,14 @@
   --font-ui: 'Libre Baskerville', Georgia, serif;
 }
 
+body::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Edge */
+}
+html {
+    scrollbar-width: none; /* For Firefox */
+}
+
+
 html {
   background-color: var(--background);
   position: relative;
@@ -79,7 +87,7 @@ footer {
   align-items: center;
   justify-content: center;
   vertical-align: center;
-  overflow: hidden
+  overflow: visible;
 }
 
 .meicycle-wrapper svg {
