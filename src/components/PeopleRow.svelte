@@ -1,4 +1,5 @@
 <script>
+  import { getYearsServed, getMembersYearsServed } from '../shared/getmembers';
   import ManIcon from './ManIcon.svelte';
   export let count = 7;
   export let altinator = false;
@@ -13,6 +14,7 @@
   export let iconBase = 64;
   export let shirtColor = '#ff7675';
   export let skinColor = '#74b9ff';
+  export let skinColorSelected = '#bf392f';
 
   function testHairColorSet() {
     altinator = !altinator;
@@ -71,16 +73,6 @@
   let placeholderHouse = 6;
   let placeholderSenate = 20;
 
-  // function handleMouseOver(e){
-  //   console.log("HIIII");
-  //   isHovered = true;
-  // }
-  //
-  // function handleMouseOut(e){
-  //   console.log("BYEEE")
-  //   isHovered = null;
-  // }
-
 </script>
 
 <svg width={width} height={height} style="overflow:visible; display:block">
@@ -112,23 +104,7 @@
     fill="none"
     pointer-events="none"
   />
-
-  <!--{#if isHovered !== null}-->
-  <!--  <foreignObject-->
-  <!--          x={positions[isHovered].x - 80}-->
-  <!--          y={positions[isHovered].y - iconBase * positions[isHovered].scale - 90}-->
-  <!--          width="160"-->
-  <!--          height="80"-->
-  <!--  >-->
-  <!--    <div xmlns="http://www.w3.org/1999/xhtml"-->
-  <!--         style="background:#333;color:white;padding:6px 10px;border-radius:6px;font-size:12px;text-align:center;">-->
-  <!--      Age: {placeholderAge}<br/>-->
-  <!--      Years served in House: {placeholderHouse}<br/>-->
-  <!--      Years served in Senate: {placeholderSenate}-->
-  <!--    </div>-->
-  <!--  </foreignObject>-->
-  <!--{/if}-->
-
+  
   {#each drawOrder as idx}
     {#if positions[idx]}
       <g
@@ -141,7 +117,7 @@
           y={positions[idx].y - iconBase * positions[idx].scale}
           hairColor={(idx + (altinator ? 1 : 0)) % 2 === 0 ? '#fdcb6e' : '#dfe6e9'}
           shirtColor={shirtColor}
-          skinColor={skinColor}
+          skinColor={isHovered === idx ? skinColorSelected : skinColor}
           yob={people && people[idx] ? people[idx].yob : null}
           age={people && people[idx] && year ? year - people[idx].yob : null}
           client:load
@@ -149,11 +125,16 @@
       </g>
     {/if}
     {#if isHovered === idx}
-      <foreignObject x={positions[idx].x + 10}  y={positions[idx].y - 10} width="160" height="80">
-        <div style="background:#333;z-index:9999;color:white;padding:4px 8px;border-radius:4px;font-size:12px;text-align:center;">
-          Age: {placeholderAge}<br/>
-          Years served in House: {placeholderHouse}<br/>
-          Years served in Senate: {placeholderSenate}<br/>
+      {@const hoverWidth = 160}
+      {@const hoverHeight = 80}
+      {@const x = Math.min(Math.max(positions[idx].x - hoverWidth / 2, 60), width - (hoverHeight + 140))}
+      {@const y = positions[idx].y - 120 - Math.abs(positions[idx].x - (width - 40) / 2) * .05  }
+      {@const yearsServed = getMembersYearsServed(year, people[idx])}
+      <foreignObject x={x}  y={y} width={hoverWidth} height={hoverHeight} pointer-events="none">
+        <div style="background:#333;z-index:9999;color:white;padding:4px 8px;border-radius:4px;font-size:20px;text-align:center;">
+          Age: {people && people[idx] ? year - people[idx].yob : null}<br/>
+          House: {yearsServed.house} yrs<br/>
+          Senate: {yearsServed.senate} yrs<br/>
         </div>
       </foreignObject>
     {/if}
