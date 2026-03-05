@@ -69,7 +69,7 @@
       const minY = Math.min(...ys);
       const maxY = Math.max(...ys);
       const norm = (p.y - minY) / (maxY - minY || 1);
-      const scale = 1.0 + norm * 0.2; // range ~0.6..1.2
+      const scale = 1.1 + norm * 0.4; // range ~0.6..1.2
       
       const tx = 2 * (1 - p.t) * (mid.x - left.x) + 2 * p.t * (right.x - mid.x);
       const ty = 2 * (1 - p.t) * (mid.y - left.y) + 2 * p.t * (right.y - mid.y);
@@ -99,7 +99,7 @@
     <filter id="dropShadow" x="0" y="0" width="200%" height="200%">
         <feDropShadow dx="5" dy="5" stdDeviation="4" flood-color="black" flood-opacity="0.5" />
     </filter>
-    <filter id="blur" x="-50%" y="-50%" width="200%" height="300%">
+    <filter id="blur" x="-50%" y="-100%" width="200%" height="400%">
         <feGaussianBlur in="SourceGraphic" stdDeviation="4" />
     </filter>
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
@@ -109,11 +109,13 @@
 
   <!-- shadow of row -->
   <path
-    d={`M ${padding - 25} ${height - 58} Q ${width / 2} ${height - 198} ${width - padding + 25} ${height - 58}`}
+    // d={`M ${padding - 30} ${height - 55 - iconBase * 1.1 + 55} Q ${width / 2} ${height - 190 - iconBase * 1.1 + 60} ${width - padding + 30} ${height - 55 - iconBase * 1.1 + 55}`}
+
+    d={`M ${padding - 35} ${height - 55 - iconBase * 1.1 + 58} Q ${width / 2} ${height - 190 - iconBase * 1.1 + 63} ${width - padding + 35} ${height - 55 - iconBase * 1.1 + 58}`}
     // stroke="#9a5e0b"
     stroke="rgba(0,0,0)"
     // stroke="rgba(68,33,20,.9)"
-    stroke-width={iconBase * .9}
+    stroke-width={iconBase * .91}
     stroke-linecap="miter"
     stroke-linejoin="miter"
     fill="none"
@@ -123,9 +125,10 @@
 
   <!-- thick quad ribbon overlay in front of the row to create a "stage" and cover bottom corners -->
   <path
-    d={`M ${padding - 20} ${height - 60} Q ${width / 2} ${height - 200} ${width - padding +20} ${height - 60}`}
+    d={`M ${padding - 30} ${height - 55 - iconBase * 1.1 + 55} Q ${width / 2} ${height - 190 - iconBase * 1.1 + 60} ${width - padding + 30} ${height - 55 - iconBase * 1.1 + 55}`}
+    // d={`M ${padding - 20} ${height - 60} Q ${width / 2} ${height - 200} ${width - padding +20} ${height - 60}`}
     // stroke="#9a5e0b"
-    stroke="rgba(158,94,12)"
+    stroke="rgba(158,94,12, .7)"
     // stroke="rgba(68,33,20,.9)"
     stroke-width={iconBase * .75}
     stroke-linecap="miter"
@@ -135,7 +138,7 @@
   />
 
   <!-- yellow glow -->
-  <path
+  <!-- <path
     d={`M ${padding - 15} ${height - 55 - iconBase * .6 + 20} Q ${width / 2} ${height - 190 - iconBase * .6 + 20} ${width - padding + 15} ${height - 55 - iconBase * .6 + 20}`}
     stroke="#ffff00"
     stroke-width={6}
@@ -144,7 +147,7 @@
     fill="none"
     pointer-events="none"
     filter="url(#glow)"
-  />
+  /> -->
   
   {#each drawOrder as idx}
     {#if positions[idx]}
