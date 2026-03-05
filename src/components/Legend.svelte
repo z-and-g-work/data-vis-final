@@ -2,7 +2,7 @@
     import ManIcon from '../components/ManIcon.svelte';
 
     import {getMembersYearsServed} from "../shared/getmembers.js";
-    const positions = [{x: -20, y:0, age: 30}, {x: 40, y:0, age: 40}, {x: 80, y:0, age: 50}, {x: 120, y:0, age: 60}, {x: 200, y:0, age: 70}, {x: 200, y:0, age: 80}]
+    const ages = [30, 40, 50, 60, 70, 80]
 
     export let iconBase = 125;
     export let shirtColor = '#ff7675';
@@ -46,7 +46,7 @@
 <div class="legend">
     <h3 class="legend-title">Member Age</h3>
     <div class="legend-items">
-        {#each positions as idx}
+        {#each ages as age}
             <div class="legend-icons">
                 <svg
                         style="overflow:visible;"
@@ -60,11 +60,11 @@
                         <circle cx="100" cy="70" r="35" fill={skinColor}  />
                         <path
                                 d={`M${x1} ${y1} A35 32 ${rotation} 1 1 ${x2} ${y2} Z`}
-                                fill={scaleColor(idx.age)}
+                                fill={scaleColor(age)}
                         />
                     {/if}
                 </svg>
-                <p class="legend-label">{idx.age}</p>
+                <p class="legend-label">{age}</p>
             </div>
         {/each}
     </div>

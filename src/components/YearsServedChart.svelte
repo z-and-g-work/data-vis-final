@@ -84,7 +84,7 @@
 
         d3.select(svg)
             .attr("width", width)
-            .attr("height", height);
+            .attr("height", height + 25);
 
         //create legend
         const keys = ["House of Representatives", "Senate"];
