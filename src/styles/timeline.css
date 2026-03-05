@@ -1,18 +1,19 @@
 .timeline-and-text-container {
     width: 100%;
-    /* margin: 0 5%; */
     height: 60px;
 
     position: sticky;
-    top: 0; /* Stick to the top edge of the viewport */
+    top: 0;
+    z-index: 100;
 }
 
 .timeline-and-text-container p {
+    font-family: var(--font-ui);
+    font-weight: bold;
     background-color: var(--background);
     text-align: center;
-    margin: 0;
+    padding: 10px;
 }
-
 
 .timeline-container {
     width: 100%;
@@ -31,13 +32,14 @@
     border-right: 1px solid #ccc;
     background-color: white;
     color: #333;
+    font-family: var(--font-ui);
     font-size: 0.7rem;
     cursor: pointer;
     padding: 0;
 }
 
 .timeline-container button:last-child {
-    border-right: none;    /* remove divider on last button */
+    border-right: none;
 }
 
 .timeline-container button:hover {
@@ -47,4 +49,5 @@
 .timeline-container button.active {
     background-color: var(--text-subtitle);
     color: white;
+    font-weight: bold;
 }

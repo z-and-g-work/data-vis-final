@@ -25,7 +25,7 @@
 </script>
 
 <div class="timeline-and-text-container">
-    <p> Currently { $selectedYear } : { $selectedYear % 2 ? '1st' : '2nd' } half of congress { Math.ceil(( $selectedYear - 1788) / 2)} </p>
+    <p> Currently { $selectedYear } : { $selectedYear % 2 ? '1st' : '2nd' } Half of Congress { Math.ceil(( $selectedYear - 1788) / 2)} </p>
     <div class="timeline-container">
         {#each options as option}
             <button
