@@ -84,11 +84,18 @@ footer {
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
+  margin-bottom: 55px;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   vertical-align: center;
   overflow: visible;
+}
+
+.legend-wrapper {
+  position: absolute;
+  bottom: -65px;
 }
 
 .meicycle-wrapper svg {
@@ -119,4 +126,32 @@ footer {
 /* i (gabe) like this - depends on the type of information been has ben cooking up */
 .blurb p {
   text-align: justify;
+}
+
+.legend {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.legend-items {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.legend-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 26px;
+}
+
+.legend-label {
+  position: absolute;
+  font-size: 30px;
+  bottom: 8px;
+
 }
