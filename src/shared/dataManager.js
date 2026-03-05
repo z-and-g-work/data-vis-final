@@ -16,7 +16,7 @@ async function fetchYear(year) {
     if (cache[congressNumber]) {
         return cache[congressNumber]
     };
-    const data = await d3.json(`/public/data/by_congress/${congressNumber}.json`);
+    const data = await d3.json(`/data/by_congress/${congressNumber}.json`);
     cache[congressNumber] = data;
     return data;
 };
