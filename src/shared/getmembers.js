@@ -51,3 +51,25 @@ export function getYearsServed(year, data) {
         return [member.name, year - member.yob, houseYears, senateYears]
     })
 }
+
+export function getMembersYearsServed(year, data) {
+
+    console.log(data);
+
+    const congressNumberThatYear = Math.ceil((year - 1788) / 2);
+
+    let houseYears = 0;
+    let senateYears = 0;
+
+    data.terms.forEach(term => {
+        if (term.congress <= congressNumberThatYear) {
+            let yearsServedThatTerm = term.endYear - term.startYear;
+            term.chamber === "Senate" ? senateYears += yearsServedThatTerm : houseYears += yearsServedThatTerm;
+        }
+    })
+
+    console.log(houseYears);
+    const person = {house: houseYears, senate: senateYears}
+
+    return {house: houseYears, senate: senateYears}
+}
