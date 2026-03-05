@@ -4,6 +4,7 @@
     import {getMembersFromYear} from "../shared/getmembers.js";
     import {onMount} from "svelte";
     import { selectedYear, congressData, loadYear } from "../shared/dataManager.js";
+    import "../styles/style.css"
 
     // export let year;
     export let chamber;
@@ -24,18 +25,13 @@
         //set dimensions and margins
         const width = 640;
         const height = 400;
-        const marginTop = 20;
+        const marginTop = 50;
         const marginRight = 20;
         const marginBottom = 30;
         const marginLeft = 60;
 
         const congressNumberThatYear = Math.ceil((year - 1788) / 2);
-        // console.log(congressNumberThatYear);
 
-        //get all data from that year's congress todo: remove
-        // const data = await d3.json(`/public/data/by_congress/${congressNumberThatYear}.json`);
-        //get members from specified year
-        // const filteredData = getMembersFromYear(chamber, year, data);
         const filteredData = getMembersFromYear(chamber, year, data);
 
         //get ages of each member and sort them into bins
@@ -67,19 +63,25 @@
             .attr("width", width)
             .attr("height", height + 25);
 
+        d3.select(svg).append("text")
+            .attr("class", "chart-title")
+            .attr("x", width / 2)
+            .attr("y", 20)
+            .text(`${chamber}`);
+
         //create labels
         d3.select(svg).append("text")
-            .attr("x", width/2 - 30)
+            .attr("class", "chart-label")
+            .attr("x", width/2)
             .attr("y", height + 20)
-            .text("Age Range")
-            .style("font-family", "Arial");
+            .text("Age Range");
 
         d3.select(svg).append("text")
+            .attr("class", "chart-label")
             .attr("transform", "rotate(-90)")
             .attr("y", 20)
-            .attr("x", -height/2 - 60)
-            .text("Number of Members")
-            .style("font-family", "Arial");
+            .attr("x", -height/2)
+            .text("Number of Members");
 
         //create x axis
         d3.select(svg).append("g")
