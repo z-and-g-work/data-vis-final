@@ -83,8 +83,8 @@
             .range([height - marginBottom, marginTop]);
 
         d3.select(svg)
-            .attr("width", width + 500)
-            .attr("height", height + 25);
+            .attr("width", width)
+            .attr("height", height);
 
         //create legend
         const keys = ["House of Representatives", "Senate"];

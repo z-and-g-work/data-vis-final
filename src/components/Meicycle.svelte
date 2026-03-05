@@ -103,9 +103,9 @@
 </script>
 
 <svg
-  width={width}
-  height={rowsPeople.length * rowHeight + (rowsPeople.length - 1) * rowGap}
-  style="overflow:visible; display:block"
+  viewBox={`0 0 ${width} ${rowsPeople.length * rowHeight + (rowsPeople.length - 1) * rowGap}`}
+  preserveAspectRatio="xMidYMid meet"
+  style="display:block; width:100%; height:auto;"
 >
   {#each rowsPeople as peopleRow, i}
     <g transform={`translate(0, ${i * (rowHeight + rowGap)})`}>

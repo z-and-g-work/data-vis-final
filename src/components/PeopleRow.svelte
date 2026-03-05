@@ -75,7 +75,7 @@
 
 </script>
 
-<svg width={width} height={height} style="overflow:visible; display:block">
+<svg width={width} height={height} style="display:block">
   {#each drawOrder as idx}
     {#if positions[idx]}
       <g>
@@ -96,11 +96,11 @@
 
   <!-- thick quad ribbon overlay in front of the row to create a "stage" and cover bottom corners -->
   <path
-    d={`M ${padding} ${height - 20} Q ${width / 2} ${height - 120} ${width - padding} ${height - 20}`}
+    d={`M ${padding - 20} ${height - 20} Q ${width / 2} ${height - 120} ${width - padding +20} ${height - 20}`}
     stroke="rgba(0,0,0,0.8)"
     stroke-width={iconBase * 1.2}
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    stroke-linecap="miter"
+    stroke-linejoin="miter"
     fill="none"
     pointer-events="none"
   />

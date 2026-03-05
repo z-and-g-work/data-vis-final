@@ -63,15 +63,6 @@ body, p, li, td, th {
   color: var(--text-primary);
 }
 
-.graph {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
-  min-height: 60vh;
-}
-
 footer {
   text-align: center;
   font-family: var(--font-body);
@@ -81,17 +72,24 @@ footer {
 }
 
 .meicycle-wrapper {
-  min-height: 60vh;
   width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
   vertical-align: center;
+  overflow: hidden
 }
 
-.yschart {
+.meicycle-wrapper svg {
+  margin-top: 50px;
+}
+
+.chart {
   width: 100%;
-  min-height: 60vh;
+  max-width: 1600px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -107,4 +105,9 @@ footer {
   font-size: 1.05rem;
   line-height: 1.7;
   color: var(--text-primary);
+}
+
+/* i (gabe) like this - depends on the type of information been has ben cooking up */
+.blurb p {
+  text-align: justify;
 }

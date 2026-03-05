@@ -17,49 +17,52 @@ import YearDropdown from "../components/YearDropdown.svelte";
 	<h3>With Age Comes With Experience</h3><br>
   
   <div class="blurb">
-    <p>fkjkjuhiuhiuhoivuhvuguygugugyivgugvuguigvugugjgkuxtuxtutxcuvugububiuyguyguygciyicuityuiutiutttttttttttttttttttttttttttttttttttttttttttttttt
-    hghjgkjgjgkjgkjgkjgkjgkjgkuuuuuuuuuuuuuuuuuuuuuuhbuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu</p>
+    <p>fkjkjuhiuh iuhoivuhvu guygugugyivgugv uguigvugugjgkuxtuxtutxcuvugubu biuyguyguygciyicuityuiutiutttttttt ttttttttttttttttttt ttttttttttttttttttttt
+    hghjgkjgjgkjgkjgkjgk jgkjgkuuuuuuuuuuuu. uuuuuuuuuhbuuuuuuuuuuuuuuuuuu. uuuuuuuuuuuuuuuuuu</p>
   </div>
-  <br></br><br></br>
   
   <YearDropdown client:load />
 
 	<div class="meicycle-wrapper">
-      <Meicycle client:load
+      <Meicycle 
+        client:load
         rows={[25,23,21,19,17,15,13,11,9]}
         width={1200}
         rowHeight={260}
         rowGap={-200}
-		client:load
       />
     </div>
-    <br></br><br></br>
 
     <div class="blurb">
-    <p>fkjkjuhiuhiuhoivuhvuguygugugyivgugvuguigvugugjgkuxtuxtutxcuvugububiuyguyguygciyicuityuiutiutttttttttttttttttttttttttttttttttttttttttttttttt
-    hghjgkjgjgkjgkjgkjgkjgkjgkuuuuuuuuuuuuuuuuuuuuuuhbuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu</p>
-    </div>
-    <br></br><br></br>
+    <p>fkjkjuhiuhiuho ivuhvuguygugugyivgugv uguigvugugjgkuxtuxtutxcuvu gububiuyguyguygciyicuity
+    hghjgkjgjgkjgkjgkjgkjg kjgkuuuuuuuuuuuuuuuuu uuuuuhbuuuuuuuuuuuuuuuuuuu uuuuuuuuuuuuuuuuuu</p>
+  </div>
 
-  <AgeComparisonChart chamber={"House of Representatives"} client:load/>
-	<AgeComparisonChart chamber={"Senate"} client:load/>
-  <br></br>
+  <div class="chart">
+    <AgeComparisonChart chamber={"House of Representatives"} client:load/>
+  </div>
+  <div class="chart">
+    <AgeComparisonChart  chamber={"Senate"} client:load/>
+  </div>
 
   <div class="blurb">
-    <p>fkjkjuhiuhiuhoivuhvuguygugugyivgugvuguigvugugjgkuxtuxtutxcuvugububiuyguyguygciyicuityuiutiutttttttttttttttttttttttttttttttttttttttttttttttt
-    hghjgkjgjgkjgkjgkjgkjgkjgkuuuuuuuuuuuuuuuuuuuuuuhbuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu</p>
+    <p>sntho snthaoes oea aeou aoeu uaoeuhtn aoeu. aoeuhhtn aoeuhtns auhetot uas aoeht na taoeu shteuao hteaouh hoeuts aoeu oeuh eh e e oe non e uhoetnnoh uoe o o. oe e etu u o o o u noeuttoeu tnoeu neo oen tlnsaohteur,.aucr aunsth ekj ak cecrh aecr cr laeouh a fm,arlmurlsmlr 'cr ',e .u hm r.u ,.ur .ucr rc kjkjuhiuh iuhoivu vuguygugu gyivgugvuguig vugugjgkuxtu xtutxcuvugububiuy guyguygciyicuityu iutiutttt tttttttttttt tttttttttttttttt ttttttttttt ttttt
+    hghjgkjgjgkjgkjgkjgkjgk
+    jgkuuuuuuuuuu uuuuuuuuu uuuhbuuuuuuuuuuuuuuuuuuuuuuuu uuuuuuuuuuuuu</p>
   </div>
-  <br></br><br></br>
   
-  <div class="yschart">
+
+  <div class="chart">
 	  <YearsServedChart client:load />
-	</div>
+  </div>
 
   <div class="blurb">
-    <p>fkjkjuhiuhiuhoivuhvuguygugugyivgugvuguigvugugjgkuxtuxtutxcuvugububiuyguyguygciyicuityuiutiutttttttttttttttttttttttttttttttttttttttttttttttt
-    hghjgkjgjgkjgkjgkjgkjgkjgkuuuuuuuuuuuuuuuuuuuuuuhbuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu</p>
+    <p>fkjkjuhiuhiuhoiv uhvuguygugug yivgugvuguigvug ugjgkuxtuxtutxcuvugububiuyg uyguygciyicuityuiutiuttttttttttttt ttttttttttttttttttttttttttttttttttt
+    hghjgkjgjgkjgkjgkjgkjgkjgku uuuuuuuuuuuuuuuuuuuuuhbuuuuuuuuuuuuuuu uuuuuuuuuuuuuuuuuuuuuu</p>
   </div>
-  <br></br><br></br>
+
+
+  <hr>
 	<Footer />
 </body>
 </html>
