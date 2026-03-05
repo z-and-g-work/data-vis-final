@@ -111,7 +111,7 @@
   <path
     // d={`M ${padding - 30} ${height - 55 - iconBase * 1.1 + 55} Q ${width / 2} ${height - 190 - iconBase * 1.1 + 60} ${width - padding + 30} ${height - 55 - iconBase * 1.1 + 55}`}
 
-    d={`M ${padding - 35} ${height - 55 - iconBase * 1.1 + 58} Q ${width / 2} ${height - 190 - iconBase * 1.1 + 63} ${width - padding + 35} ${height - 55 - iconBase * 1.1 + 58}`}
+    d={`M ${padding - 35} ${height - 55 - iconBase * 1.1 + 58} Q ${width / 2} ${height - 190 - iconBase * 1.1 + 65} ${width - padding + 35} ${height - 55 - iconBase * 1.1 + 58}`}
     // stroke="#9a5e0b"
     stroke="rgba(0,0,0)"
     // stroke="rgba(68,33,20,.9)"
@@ -125,7 +125,7 @@
 
   <!-- thick quad ribbon overlay in front of the row to create a "stage" and cover bottom corners -->
   <path
-    d={`M ${padding - 30} ${height - 55 - iconBase * 1.1 + 55} Q ${width / 2} ${height - 190 - iconBase * 1.1 + 60} ${width - padding + 30} ${height - 55 - iconBase * 1.1 + 55}`}
+    d={`M ${padding - 30} ${height - 55 - iconBase * 1.1 + 55} Q ${width / 2} ${height - 190 - iconBase * 1.1 + 65} ${width - padding + 30} ${height - 55 - iconBase * 1.1 + 55}`}
     // d={`M ${padding - 20} ${height - 60} Q ${width / 2} ${height - 200} ${width - padding +20} ${height - 60}`}
     // stroke="#9a5e0b"
     stroke="rgba(158,94,12, .7)"
