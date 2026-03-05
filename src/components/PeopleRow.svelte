@@ -150,7 +150,11 @@
       </g>
     {/if}
     {#if isHovered === idx}
-      <foreignObject x={positions[idx].x + 10}  y={positions[idx].y - 10} width="160" height="80">
+      {@const hoverWidth = 160}
+      {@const hoverHeight = 80}
+      {@const x = Math.min(Math.max(positions[idx].x - hoverWidth / 2, 60), width - (hoverHeight + 140))}
+      {@const y = positions[idx].y - 80 - Math.abs(positions[idx].x - (width - 40) / 2) * .05  }
+      <foreignObject x={x}  y={y} width={hoverWidth} height={hoverHeight} pointer-events="none">
         <div style="background:#333;z-index:9999;color:white;padding:4px 8px;border-radius:4px;font-size:12px;text-align:center;">
           Age: {placeholderAge}<br/>
           Years served in House: {placeholderHouse}<br/>
