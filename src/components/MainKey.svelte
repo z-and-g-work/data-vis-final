@@ -1,4 +1,6 @@
 <script>
+    import "./../styles/style.css";
+    
     let start = { r: 0x1a, g: 0x1a, b: 0x1a }; // black
     let end = { r: 0xf5, g: 0xf5, b: 0xf5 }; // black / brown pairing
     let ages = [30, 40, 50, 60, 70, 80];
@@ -21,91 +23,25 @@
 
         <!-- Clip to only show bottom half of circles -->
         <clipPath id="bottomHalf">
-            <rect x="0" y="220" width="1000" height="200" />
+            <rect x="0" y="60" width="1000" height="200" />
         </clipPath>
 
         <filter id="blur-again" x="-50%" y="-100%" width="200%" height="300%">
             <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
         </filter>
     </defs>
-    
-    <!-- blur top -->
-    <path
-        d={`M350 -40 L650 -40 L 650 10 L 350 10 Z`}
-        fill="black"
-        stroke="black"
-        stroke-width=10
-        stroke-linejoin="round"
-        filter="url(#blur-again)"
-    />
-
-    <!-- blur main -->
-    <path
-        d={`M-40 0 L1040 0 L 1040 290 L -40 290 Z`}
-        fill="black"
-        stroke="black"
-        stroke-width=10
-        stroke-linejoin="round"
-        filter="url(#blur-again)"
-    />
-
-    <!-- top border -->
-    <path
-        d={`M350 -40 L650 -40 L 650 10 L 350 10 Z`}
-        fill="none"
-        stroke="black"
-        stroke-width=6
-        stroke-linejoin="round"
-    />
-
-    <!-- main fill and border -->
-    <path
-        d={`M-30 0 L1040 0 L 1040 290 L -30 290 Z`}
-        fill={"rgba(158,94,12)"}
-        stroke="black"
-        stroke-width=6
-        stroke-linejoin="round"
-    />
-
-    <!-- top overwrite -->
-    <path
-        d={`M353 -37 L647 -37 L 647 10 L 353 10 Z`}
-        // fill="none"
-        fill={"rgba(158,94,12)"}
-        // stroke="none"
-        stroke-left="white"
-        stroke-width=6
-        stroke-linejoin="round"
-    />
-
-    <!-- color gradient -->
-    <path
-        d={`M60 80 L940 80`}
-        stroke="url(#myGradient)"
-        stroke-width=100
-        stroke-linecap="round"
-    />
 
     <text
-        x=500
-        y=10
-        text-anchor="middle"
-        font-size="48"
-        fill="black"
-        font-family="sans-serif"
-        font-weight=600
-        stroke='rgb(255,255,255,.5)'
-        stroke-width=7
-        paint-order="stroke"
-    >
-        Age Key
-    </text>
-
-    <!-- make color gradient only top half -->
-    <path
-        d={`M10 80 L990 80 L 990 150 L 10 150 Z`}
-        fill="rgba(158,94,12)"
-    />
+            x={500}
+            y="-35"
+            text-anchor="middle"
+            font-size="80"
+            fill="var(--text-subtitle)"
+            font-family="var(--font-heading)"
+            font-weight=400
+        >
+            Member Age
+        </text>
 
     <!-- Semi-circles (bottom half only) with labels -->
     {#each ages as age, i}
@@ -114,44 +50,34 @@
         {@const g = Math.round(start.g + (end.g - start.g) * ((age - 30) / 50))}
         {@const b = Math.round(start.b + (end.b - start.b) * ((age - 30) / 50))}
         {@const color = `rgb(${r}, ${g}, ${b})`}
-        
-        <path 
-            d={`M ${cx} 81 L ${cx} 100`}
-            stroke="black"
-            stroke-width=2
-        />
 
         <text
             x={cx}
-            y="140"
+            y="185"
             text-anchor="middle"
-            font-size="42"
+            font-size="64"
             fill="black"
-            font-family="sans-serif"
+            font-family="var(--font-heading)"
             font-weight=600
-            stroke='rgb(255,255,255,.5)'
-            stroke-width=7
-            paint-order="stroke"
         >
             {age}
         </text>
 
         <path 
-            d={`M ${cx} 150 L ${cx} 180`}
-            stroke="black"
-            stroke-width=2
+            d={`M ${cx - 70} 130 L ${cx - 70} -10 L ${cx + 70} -10 L ${cx + 70} 130 Z`}
+            fill="rgba(158,94,12)"
         />
 
         <circle
             cx={cx}
-            cy="220"
+            cy="60"
             r="50"
             fill={color}
         />
 
         <circle
             cx={cx}
-            cy="220"
+            cy="60"
             r="50"
             fill="#74b9ff"
             clip-path="url(#bottomHalf)"
