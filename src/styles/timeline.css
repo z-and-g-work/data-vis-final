@@ -1,18 +1,36 @@
 .timeline-and-text-container {
     width: 100%;
-    /* margin: 0 5%; */
+    max-width: 1600px;
     height: 60px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 
     position: sticky;
-    top: 0; /* Stick to the top edge of the viewport */
+    margin: 0 auto;
+    top: 10px;
+    z-index: 100;
 }
 
 .timeline-and-text-container p {
+    font-family: var(--font-ui);
+    font-weight: bold;
     background-color: var(--background);
     text-align: center;
-    margin: 0;
+    padding: 10px;
 }
 
+.text-container {
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: inline-block;
+    background-color: white;
+    border: 1.5px solid black;
+    border-radius: 4px 4px 0 0;
+    border-bottom: none;
+    text-align: center;
+}
 
 .timeline-container {
     width: 100%;
@@ -31,13 +49,15 @@
     border-right: 1px solid #ccc;
     background-color: white;
     color: #333;
+    font-family: var(--font-ui);
     font-size: 0.7rem;
     cursor: pointer;
     padding: 0;
+    transition: background-color 0.4s ease, color 0.4s ease; 
 }
 
 .timeline-container button:last-child {
-    border-right: none;    /* remove divider on last button */
+    border-right: none;
 }
 
 .timeline-container button:hover {
@@ -47,4 +67,5 @@
 .timeline-container button.active {
     background-color: var(--text-subtitle);
     color: white;
+    font-weight: bold;
 }

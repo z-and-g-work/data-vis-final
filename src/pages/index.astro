@@ -14,25 +14,55 @@ import YearDropdown from "../components/YearDropdown.svelte";
 <html>
 <body>
 	<h1>Politicians</h1>
-	<h3>With Age Comes With Experience</h3>
-	<YearDropdown client:load />
-
-
+	<h3>With Age Comes With Experience</h3><br>
+  
+  <div class="blurb">
+    <p>fkjkjuhiuh iuhoivuhvu guygugugyivgugv uguigvugugjgkuxtuxtutxcuvugubu biuyguyguygciyicuityuiutiutttttttt ttttttttttttttttttt ttttttttttttttttttttt
+    hghjgkjgjgkjgkjgkjgk jgkjgkuuuuuuuuuuuu. uuuuuuuuuhbuuuuuuuuuuuuuuuuuu. uuuuuuuuuuuuuuuuuu</p>
+  </div>
+  
+  <YearDropdown client:load />
 
 	<div class="meicycle-wrapper">
-      <Meicycle client:load
-        rows={[25,23,21,19,17,15,13,11,9]}
+      <Meicycle 
+        client:load
+        rows={[0,0,0,0,0,0,0,0,0,0,0,0,0]}
         width={1200}
         rowHeight={260}
-        rowGap={-200}
-		client:load
+        rowGap={-217}
       />
     </div>
-	<YearsServedChart client:load />
-	<br></br>
-	<AgeComparisonChart chamber={"House of Representatives"} client:load/>
-	<AgeComparisonChart chamber={"Senate"} client:load/>
 
+    <div class="blurb">
+    <p>fkjkjuhiuhiuho ivuhvuguygugugyivgugv uguigvugugjgkuxtuxtutxcuvu gububiuyguyguygciyicuity
+    hghjgkjgjgkjgkjgkjgkjg kjgkuuuuuuuuuuuuuuuuu uuuuuhbuuuuuuuuuuuuuuuuuuu uuuuuuuuuuuuuuuuuu</p>
+  </div>
+
+  <div class="chart">
+    <AgeComparisonChart chamber={"House of Representatives"} client:load/>
+  </div>
+  <div class="chart">
+    <AgeComparisonChart  chamber={"Senate"} client:load/>
+  </div>
+
+  <div class="blurb">
+    <p>sntho snthaoes oea aeou aoeu uaoeuhtn aoeu. aoeuhhtn aoeuhtns auhetot uas aoeht na taoeu shteuao hteaouh hoeuts aoeu oeuh eh e e oe non e uhoetnnoh uoe o o. oe e etu u o o o u noeuttoeu tnoeu neo oen tlnsaohteur,.aucr aunsth ekj ak cecrh aecr cr laeouh a fm,arlmurlsmlr 'cr ',e .u hm r.u ,.ur .ucr rc kjkjuhiuh iiuhoivu vuguygugu gyivgugvuguig vugugjgkuxtu xtutxcuvugububiuy guyguygciyicuityu iutiutttt tttttttttttt tttttttttttttttt ttttttttttt ttttt
+    hghjgkjgjgkjgkjgkjgkjgk
+    jgkuuuuuuuuuu uuuuuuuuu uuuhbuuuuuuuuuuuuuuuuuuuuuuuu uuuuuuuuuuuuu</p>
+  </div>
+  
+
+  <div class="chart">
+	  <YearsServedChart client:load />
+  </div>
+
+  <div class="blurb">
+    <p>fkjkjuhiuhiuhoiv uhvuguygugug yivgugvuguigvug ugjgkuxtuxtutxcuvugububiuyg uyguygciyicuityuiutiuttttttttttttt ttttttttttttttttttttttttttttttttttt
+    hghjgkjgjgkjgkjgkjgkjgkjgku uuuuuuuuuuuuuuuuuuuuuhbuuuuuuuuuuuuuuu uuuuuuuuuuuuuuuuuuuuuu</p>
+  </div>
+
+
+  <hr>
 	<Footer />
 </body>
 </html>

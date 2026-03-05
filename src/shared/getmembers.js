@@ -2,7 +2,7 @@ import { selectedYear, congressData } from "./dataManager.js";
 
 //takes year and chamber (senate or house) and gets every member that served that year
 export function getMembersFromYear(chamber, year, data) {
-    console.log('getMembersFromYear called', { chamber, year });
+    // console.log('getMembersFromYear called', { chamber, year });
     if (!data) {
         console.log('getMembersFromYear: no data passed');
         return [];
@@ -15,7 +15,7 @@ export function getMembersFromYear(chamber, year, data) {
     }
 
     const congressNumberThatYear = Math.ceil((year - 1788) / 2);
-    console.log('getMembersFromYear: congressNumberThatYear=', congressNumberThatYear, 'membersCount=', Array.isArray(members) ? members.length : 0);
+    // console.log('getMembersFromYear: congressNumberThatYear=', congressNumberThatYear, 'membersCount=', Array.isArray(members) ? members.length : 0);
 
     return (Array.isArray(members) ? members : []).filter(member => {
         let servedYear = false;
@@ -33,7 +33,7 @@ export function getMembersFromYear(chamber, year, data) {
 //returns a list of the years served in the house and senate for each congress member
 export function getYearsServed(year, data) {
 
-    console.log(data);
+    // console.log(data);
 
     const congressNumberThatYear = Math.ceil((year - 1788) / 2);
     return data.map(member => {
@@ -54,8 +54,6 @@ export function getYearsServed(year, data) {
 
 export function getMembersYearsServed(year, data) {
 
-    console.log(data);
-
     const congressNumberThatYear = Math.ceil((year - 1788) / 2);
 
     let houseYears = 0;
@@ -68,7 +66,7 @@ export function getMembersYearsServed(year, data) {
         }
     })
 
-    console.log(houseYears);
+    // console.log(houseYears + senateYears);
     const person = {house: houseYears, senate: senateYears}
 
     return {house: houseYears, senate: senateYears}

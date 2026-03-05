@@ -1,50 +1,48 @@
-/* @font-face {
-  font-family: 'usag';
-  src: url('../fonts/usa/usag.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-} */
-
-/* @font-face {
-  font-family: 'usag';
-  src: url('../fonts/Personal License/All Americans Personal.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-} */
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
   --background: #f5e6c8;
-  --text-: #00b894;
   --text-primary: #2d3436;
   --text-title: #d63031;
   --text-subtitle: #d63031;
+  /* --text-subtitle: #e1d232; */
+
+  --font-heading: 'IM Fell English', Georgia, serif;
+  --font-subheading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'EB Garamond', Georgia, serif;
+  --font-ui: 'Libre Baskerville', Georgia, serif;
 }
 
-@font-face {
-  font-family: 'legal-bold';
-  src: url('../fonts/legal-tender/legalv2.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+body::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Edge */
+}
+html {
+    scrollbar-width: none; /* For Firefox */
 }
 
-@font-face {
-  font-family: 'legal';
-  src: url('../fonts/legal-tender/legalv2c.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
 
 html {
   background-color: var(--background);
+  position: relative;
 }
 
-h1, h3 {
+/* html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("../img/parchment-background.jpg");
+  background-repeat: repeat;
+  opacity: 0.2;
+  z-index: -1;
+} */
+
+h1 {
   text-align: center;
-  font-family: 'legal-bold', sans-serif;
+  font-family: var(--font-heading);
+  font-style: italic; 
   color: var(--text-subtitle);
-}
-
-h1, h3 {
+  padding-top: 20px;
+  font-size: 200%;
   text-shadow:
     0 0 4px #fff,
     0 0 16px #fff,
@@ -53,34 +51,73 @@ h1, h3 {
 
 h2 {
   text-align: center;
-  font-family: 'legal-bold', sans-serif;
+  font-family: var(--font-heading);
   color: var(--text-title);
 }
 
-.graph {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
-  min-height: 60vh; /* ensure some vertical space for centering */
+h3 {
+  text-align: center;
+  font-family: var(--font-subheading);
+  font-weight: 600;
+  color: var(--text-subtitle);
+  font-size: 170%;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 16px #fff,
+    0 0 24px #fff;
 }
 
-p {
-  font-family: 'legal', sans-serif;
+body, p, li, td, th {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+}
+
+footer {
+  text-align: center;
+  font-family: var(--font-body);
   color: var(--text-primary);
   font-weight: 400;
-}
-
-hr {
-  color: var(--text-primary);
+  font-style: italic;
 }
 
 .meicycle-wrapper {
-  min-height: 60vh;
   width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
   vertical-align: center;
+  overflow: visible;
 }
+
+.meicycle-wrapper svg {
+  margin-top: -20px;
+}
+
+.chart {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  vertical-align: center;
+}
+
+.blurb {
+  width: 100%;
+  max-width: 1000px;
+  margin: 20px auto;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+/* i (gabe) like this - depends on the type of information been has ben cooking up */
+.blurb p {
+  text-align: justify;
+}
+
