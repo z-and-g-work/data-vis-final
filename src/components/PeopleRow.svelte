@@ -128,7 +128,7 @@
     d={`M ${padding - 30} ${height - 55 - iconBase * 1.1 + 55} Q ${width / 2} ${height - 190 - iconBase * 1.1 + 65} ${width - padding + 30} ${height - 55 - iconBase * 1.1 + 55}`}
     // d={`M ${padding - 20} ${height - 60} Q ${width / 2} ${height - 200} ${width - padding +20} ${height - 60}`}
     // stroke="#9a5e0b"
-    stroke="rgba(158,94,12, .7)"
+    stroke="rgba(158,94,12)"
     // stroke="rgba(68,33,20,.9)"
     stroke-width={iconBase * .75}
     stroke-linecap="miter"
@@ -173,7 +173,7 @@
       {@const hoverWidth = 160}
       {@const hoverHeight = 100}
       {@const x = Math.min(Math.max(positions[idx].x - hoverWidth / 2, 20), width - (hoverHeight + 80))}
-      {@const y = positions[idx].y - 140 - Math.abs(positions[idx].x - (width - 40) / 2) * .05  }
+      {@const y = positions[idx].y - 150 - Math.abs(positions[idx].x - (width - 40) / 2) * .05  }
       {@const yearsServed = getMembersYearsServed(year, people[idx])}
       <foreignObject x={x}  y={y} width={hoverWidth} height={hoverHeight} pointer-events="none">
         <div style="overflow:visible;background:#333;z-index:9999;color:white;padding:4px 8px;border-radius:4px;font-size:20px;text-align:center;">
