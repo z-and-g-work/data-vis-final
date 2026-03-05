@@ -184,3 +184,10 @@
 
 </script>
 <svg bind:this={svg}></svg>
+
+<style>
+    svg {
+        display: block;
+        margin: 0 auto;
+    }
+</style>
