@@ -8,6 +8,18 @@
     export let shirtColor = '#ff7675';
     export let skinColor = '#74b9ff';
 
+    let part="head";
+    let size = iconBase;
+    let tilt=0;
+
+    const alpha = Math.asin(10 / 90);
+
+    $: x1 = 100 + 35 * Math.cos(Math.PI + alpha + tilt);
+    $: y1 = 70  + 35 * Math.sin(Math.PI + alpha + tilt);
+    $: x2 = 100 + 35 * Math.cos(-alpha + tilt);
+    $: y2 = 70  + 35 * Math.sin(-alpha + tilt);
+    $: rotation = tilt * (180 / Math.PI); // svg doesnt like radians, only degrees
+
 
     function scaleColor(age) {
         const start = { r: 0x1a, g: 0x1a, b: 0x1a }; // black
@@ -36,16 +48,22 @@
     <div class="legend-items">
         {#each positions as idx}
             <div class="legend-icons">
-                <ManIcon
-                        part="head"
-                        size={iconBase}
-                        hairColor={scaleColor(idx.age)}
-                        shirtColor={shirtColor}
-                        skinColor={skinColor}
-                        yob={idx.age}
-                        age={idx.age}
-                        tilt={0}
-                />
+                <svg
+                        style="overflow:visible;"
+                        width={size}
+                        height={size}
+                        viewBox="0 0 200 200"
+                        xmlns="http://www.w3.org/2000/svg"
+                        {...$$restProps}
+                >
+                    {#if part === 'full' || part === 'head'}
+                        <circle cx="100" cy="70" r="35" fill={skinColor}  />
+                        <path
+                                d={`M${x1} ${y1} A35 32 ${rotation} 1 1 ${x2} ${y2} Z`}
+                                fill={scaleColor(idx.age)}
+                        />
+                    {/if}
+                </svg>
                 <p class="legend-label">{idx.age}</p>
             </div>
         {/each}
