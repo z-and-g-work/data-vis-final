@@ -130,7 +130,7 @@
     </g>
   {/each}
 
-<MainKey start={start} end={end} transform={`translate(${width / 2 - 600}, ${rowsPeople.length * (rowHeight + rowGap) + 150})`} />
+<MainKey start={start} end={end} transform={`translate(${width / 2 - 600}, ${rowsPeople.length * (rowHeight + rowGap) + 130})`} />
 
 </svg>
 
