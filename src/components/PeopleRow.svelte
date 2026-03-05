@@ -16,17 +16,14 @@
   export let skinColor = '#74b9ff';
   // export let skinColor = 'rgb(116,185,255,1)';
   export let skinColorSelected = '#bf392f';
+  export let start = null;
+  export let end = null;
 
   function testHairColorSet() {
     altinator = !altinator;
   }
 
   function scaleColor(age) {
-    const start = { r: 0x1a, g: 0x1a, b: 0x1a }; // black
-    // const start = { r: 0x3e, g: 0x27, b: 0x23 }; // brown
-    // const start = { r: 0x8b, g: 0x3a, b: 0x3a }; // auburn
-    const end = { r: 0xf5, g: 0xf5, b: 0xf5 }; // black / brown pairing
-    // const end = { r: 0xe8, g: 0xe8, b: 0xe8 }; // auburn pairing
 
     if (age <= 30) {
       return `rgb(${start.r}, ${start.g}, ${start.b})`;
@@ -102,13 +99,27 @@
     <filter id="dropShadow" x="0" y="0" width="200%" height="200%">
         <feDropShadow dx="5" dy="5" stdDeviation="4" flood-color="black" flood-opacity="0.5" />
     </filter>
-    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="300%">
         <feGaussianBlur in="SourceGraphic" stdDeviation="4" />
     </filter>
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="6" />
+        <feGaussianBlur in="SourceGraphic" stdDeviation="8" />
     </filter>
   </defs>
+
+  <!-- shadow of row -->
+  <path
+    d={`M ${padding - 25} ${height - 58} Q ${width / 2} ${height - 198} ${width - padding + 25} ${height - 58}`}
+    // stroke="#9a5e0b"
+    stroke="rgba(0,0,0)"
+    // stroke="rgba(68,33,20,.9)"
+    stroke-width={iconBase * .9}
+    stroke-linecap="miter"
+    stroke-linejoin="miter"
+    fill="none"
+    pointer-events="none"
+    filter="url(#blur)"
+  />
 
   <!-- thick quad ribbon overlay in front of the row to create a "stage" and cover bottom corners -->
   <path
@@ -123,25 +134,11 @@
     pointer-events="none"
   />
 
-<!-- thin black line for depth -->
-  <path
-    d={`M ${padding - 25.2} ${height - 55 - iconBase * .6 + 11.5} Q ${width / 2} ${height - 190 - iconBase * .6 + 5} ${width - padding + 25.2} ${height - 55 - iconBase * .6 + 11.5}`}
-    // stroke="#9a5e0b"
-    // stroke="black"
-    stroke="rgba(0,0,0,.3)"
-    stroke-width={3}
-    stroke-linecap="miter"
-    stroke-linejoin="miter"
-    fill="none"
-    pointer-events="none"
-  />
-
   <!-- yellow glow -->
-
   <path
-    d={`M ${padding - 10} ${height - 55 - iconBase * .6 + 30} Q ${width / 2} ${height - 190 - iconBase * .6 + 30} ${width - padding + 10} ${height - 55 - iconBase * .6 + 30}`}
+    d={`M ${padding - 15} ${height - 55 - iconBase * .6 + 20} Q ${width / 2} ${height - 190 - iconBase * .6 + 20} ${width - padding + 15} ${height - 55 - iconBase * .6 + 20}`}
     stroke="#ffff00"
-    stroke-width={5}
+    stroke-width={6}
     stroke-linecap="miter"
     stroke-linejoin="miter"
     fill="none"

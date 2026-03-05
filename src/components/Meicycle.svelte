@@ -1,5 +1,6 @@
 <script>
   import PeopleRow from './PeopleRow.svelte';
+  import MainKey from './MainKey.svelte';
   import { getMembersFromYear, getYearsServed } from "./../shared/getmembers.js";
   import { selectedYear, congressData } from "./../shared/dataManager.js";
 
@@ -19,9 +20,14 @@
 
   let yearsServed = [];
   $: yearsServed = $congressData ? getYearsServed($selectedYear, $congressData) : [];
-  // list of people (both chambers) for the selected year
   $: peopleList = $congressData ? getMembersFromYear("Both", $selectedYear, $congressData) : [];
   $: totalPeople = peopleList.length;
+
+  $: start = { r: 0x1a, g: 0x1a, b: 0x1a }; // black
+    // const start = { r: 0x3e, g: 0x27, b: 0x23 }; // brown
+    // const start = { r: 0x8b, g: 0x3a, b: 0x3a }; // auburn
+  $: end = { r: 0xf5, g: 0xf5, b: 0xf5 }; // black / brown pairing
+    // const end = { r: 0xe8, g: 0xe8, b: 0xe8 }; // auburn pairing
 
   function computeRowCounts(total, rcount) {
     if (rcount <= 0) return [];
@@ -39,7 +45,10 @@
       for (let i = ci - 1; i >= 0; i--) counts[i] = counts[i + 1] + 1;
       for (let i = ci + 1; i < rcount; i++) counts[i] = counts[i - 1] - 1;
       // add remainder to furthest back row (index 0)
-      counts[0] += remainder;
+      // counts[0] += remainder;
+      for (let i = 0; i < remainder; i++) {
+        counts[i] += 1;
+      }
     } else {
       // even: center two rows get ceil(avg) and floor(avg)
       const lowerCenter = rcount / 2; // index of lower center
@@ -50,7 +59,10 @@
       for (let i = upperCenter - 1; i >= 0; i--) counts[i] = counts[i + 1] + 1;
       // propagate down (towards front, increasing index) subtracting 3
       for (let i = lowerCenter + 1; i < rcount; i++) counts[i] = counts[i - 1] - 1;
-      counts[0] += remainder;
+      // counts[0] += remainder;
+      for (let i = 0; i < remainder; i++) {
+        counts[i] += 1;
+      }
     }
 
     // ensure no negative counts; if negatives, shift min to 0 and redistribute
@@ -111,10 +123,15 @@
         height={rowHeight}
         iconBase={iconBase}
         padding={padding + i * 15}
+        start={start}
+        end={end}
         // client:load
       />
     </g>
   {/each}
 
+<MainKey start={start} end={end} transform={`translate(${width / 2 - 600}, ${rowsPeople.length * (rowHeight + rowGap) + 150})`} />
 
 </svg>
+
+
