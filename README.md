@@ -11,5 +11,4 @@ On our icon visualization, you can hover over any member to see their exact age,
 
 ## Screencast Video Link
 
-INSERT LINK TO SCREENCAST VIDEO HERE
-
+[demo-video](https://www.youtube.com/embed/a6yR-bWwRNw)
