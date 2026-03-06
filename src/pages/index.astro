@@ -12,13 +12,16 @@ import YearDropdown from "../components/YearDropdown.svelte";
 ---
 
 <html>
+<head>
+  <meta charset="UTF-8" />
+</head>
 <body>
 	<h1>Politicians</h1>
 	<h3>With Age Comes With Experience</h3><br>
-  
   <div class="blurb">
-    <p>fkjkjuhiuh iuhoivuhvu guygugugyivgugv uguigvugugjgkuxtuxtutxcuvugubu biuyguyguygciyicuityuiutiutttttttt ttttttttttttttttttt ttttttttttttttttttttt
-    hghjgkjgjgkjgkjgkjgk jgkjgkuuuuuuuuuuuu. uuuuuuuuuhbuuuuuuuuuuuuuuuuuu. uuuuuuuuuuuuuuuuuu</p>
+    <p>As the years pass, so many things around us seem to change. Yet, through it all, the same politicians always seem to remain in power. We aimed to visualize this trend in aging legislators, highlighting the many members of Congress.
+      <br><br>
+      The visualization below represents the age of Congress members during a specified year. The older a Congress member is, the whiter their hair will be. Hovering over any one icon will show you the age, years served in the House, and years served in the Senate of a real member of Congress. Selecting another year on the timeline will change the visualization to use data from Congress members from that year. </p>
   </div>
   
   <YearDropdown client:load />
@@ -34,8 +37,10 @@ import YearDropdown from "../components/YearDropdown.svelte";
     </div>
 
     <div class="blurb">
-    <p>fkjkjuhiuhiuho ivuhvuguygugugyivgugv uguigvugugjgkuxtuxtutxcuvu gububiuyguyguygciyicuity
-    hghjgkjgjgkjgkjgkjgkjg kjgkuuuuuuuuuuuuuuuuu uuuuuhbuuuuuuuuuuuuuuuuuuu uuuuuuuuuuuuuuuuuu</p>
+    <p>You may notice that the icons with hair that leans closer to gray and white significantly outnumber icons with black hair. This remains true for most years selected, but the percentage of gray and white hair is higher in more recent years.
+      <br><br>
+      To illustrate this more clearly, we also created bar graphs to visualize the age distribution of Congress members in a selected year. These are separated into the House and Senate, making comparison between the age distribution of the two simple.
+      <br><b>Note</b>: The House has 435 members, and the Senate has 100 members, so the Y-axis of both scales have been adjusted to account for the number of members in each chamber.</p>
   </div>
 
     <h2>Age Distribution of Congress</h2>
@@ -45,9 +50,7 @@ import YearDropdown from "../components/YearDropdown.svelte";
     </div>
 
   <div class="blurb">
-    <p>sntho snthaoes oea aeou aoeu uaoeuhtn aoeu. aoeuhhtn aoeuhtns auhetot uas aoeht na taoeu shteuao hteaouh hoeuts aoeu oeuh eh e e oe non e uhoetnnoh uoe o o. oe e etu u o o o u noeuttoeu tnoeu neo oen tlnsaohteur,.aucr aunsth ekj ak cecrh aecr cr laeouh a fm,arlmurlsmlr 'cr ',e .u hm r.u ,.ur .ucr rc kjkjuhiuh iiuhoivu vuguygugu gyivgugvuguig vugugjgkuxtu xtutxcuvugububiuy guyguygciyicuityu iutiutttt tttttttttttt tttttttttttttttt ttttttttttt ttttt
-    hghjgkjgjgkjgkjgkjgkjgk
-    jgkuuuuuuuuuu uuuuuuuuu uuuhbuuuuuuuuuuuuuuuuuuuuuuuu uuuuuuuuuuuuu</p>
+    <p>Not is Congress senior-dominated, but many of its elderly members have been serving for decades. This clustered bar chart illustrates the average years of experience Congress members in each age range have in a specified year. </p>
   </div>
   
 
@@ -56,8 +59,7 @@ import YearDropdown from "../components/YearDropdown.svelte";
   </div>
 
   <div class="blurb">
-    <p>fkjkjuhiuhiuhoiv uhvuguygugug yivgugvuguigvug ugjgkuxtuxtutxcuvugububiuyg uyguygciyicuityuiutiuttttttttttttt ttttttttttttttttttttttttttttttttttt
-    hghjgkjgjgkjgkjgkjgkjgkjgku uuuuuuuuuuuuuuuuuuuuuhbuuuuuuuuuuuuuuu uuuuuuuuuuuuuuuuuuuuuu</p>
+    <p>Despite the fact that terms in the House and Senate are two and six years long respectively, members can keep serving as long as they're reelected. This means that there are many members that have been serving for decades, as shown in the above graph. Senior members of our current Congress will have to retire eventually, but whether this trend will continue with today's younger Congress members is yet to be determined.</p>
   </div>
 
 

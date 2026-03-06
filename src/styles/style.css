@@ -109,7 +109,7 @@ footer {
 .blurb {
   width: 100%;
   max-width: 1000px;
-  margin: 20px auto;
+  margin: 50px auto;
   font-family: var(--font-body);
   font-size: 1.05rem;
   line-height: 1.7;
