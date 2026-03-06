@@ -109,7 +109,7 @@
 <svg
   viewBox={`0 0 ${width} ${rowsPeople.length * rowHeight + (rowsPeople.length - 1) * rowGap}`}
   preserveAspectRatio="xMidYMid meet"
-  style="overflow:visible; display:block; width:100%; height:auto;"
+  style="overflow:visible; display:block; width:100%; height:auto; margin-bottom: 20px"
 >
 <!-- <path stroke="rgba(1,1,1,1)" stroke-linecap="miter" stroke-linejoin="miter" fill="none" pointer-events="none" d="M 10 240 Q 600 140 1190 240" stroke-width="76.8"></path> -->
 
@@ -130,7 +130,7 @@
     </g>
   {/each}
 
-<MainKey start={start} end={end} transform={`translate(${width / 2 - 600}, ${rowsPeople.length * (rowHeight + rowGap) + 130})`} />
+<MainKey start={start} end={end} transform={`translate(${width / 2 - 600}, ${rowsPeople.length * (rowHeight + rowGap) + 170})`} />
 
 </svg>
 

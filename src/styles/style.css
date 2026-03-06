@@ -26,16 +26,6 @@ html {
   position: relative;
 }
 
-/* html::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("../img/parchment-background.jpg");
-  background-repeat: repeat;
-  opacity: 0.2;
-  z-index: -1;
-} */
-
 h1 {
   text-align: center;
   font-family: var(--font-heading);
@@ -83,6 +73,7 @@ footer {
 .meicycle-wrapper {
   width: 100%;
   max-width: 1600px;
+  /* max-height: 70vh; */
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -92,11 +83,10 @@ footer {
 }
 
 .meicycle-wrapper svg {
-  margin-top: -10px;
+  margin-bottom: 0px;
 }
 
 .chart {
-  width: 100%;
   max-width: 1600px;
   margin: 0 auto;
   display: flex;
@@ -106,10 +96,20 @@ footer {
   vertical-align: center;
 }
 
+.bar-chart-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
 .blurb {
   width: 100%;
   max-width: 1000px;
-  margin: 20px auto;
+  margin: 50px auto;
   font-family: var(--font-body);
   font-size: 1.05rem;
   line-height: 1.7;
@@ -119,5 +119,23 @@ footer {
 /* i (gabe) like this - depends on the type of information been has ben cooking up */
 .blurb p {
   text-align: justify;
+}
+
+.chart-title {
+  font-family: var(--font-subheading);
+  font-weight: 600;
+  fill: var(--text-subtitle);
+  font-size: 26px;
+  text-anchor: middle;
+}
+
+.chart-label {
+  font-family: var(--font-body);
+  font-size: 16px;
+  text-anchor: middle;
+}
+
+.chart-legend-text {
+  font-family: var(--font-body);
 }
 

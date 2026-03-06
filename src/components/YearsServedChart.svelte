@@ -22,7 +22,7 @@
         // Declare the chart dimensions and margins.
         const width = 640;
         const height = 400;
-        const marginTop = 20;
+        const marginTop = 50;
         const marginRight = 20;
         const marginBottom = 30;
         const marginLeft = 60;
@@ -84,7 +84,7 @@
 
         d3.select(svg)
             .attr("width", width)
-            .attr("height", height);
+            .attr("height", height + 25);
 
         //create legend
         const keys = ["House of Representatives", "Senate"];
@@ -117,22 +117,29 @@
             .attr("width", 20)
             .attr("height", 20)
             .text(d => d)
-            .style("font-size", "13px")
-            .style("font-family", "Arial");
+            .attr("class", "chart-legend-text")
+            .style("font-size", "16px");
 
         //create labels
-        d3.select(svg).append("text")
-            .attr("x", width / 2 - 30)
-            .attr("y", height + 20)
-            .text("Age Range")
-            .style("font-family", "Arial");
 
         d3.select(svg).append("text")
+            .attr("class", "chart-title")
+            .attr("x", width / 2 + 20)
+            .attr("y", 20)
+            .text("Experience in Congress Grouped by Age");
+
+        d3.select(svg).append("text")
+            .attr("class", "chart-label")
+            .attr("x", width / 2)
+            .attr("y", height + 20)
+            .text("Age Range");
+
+        d3.select(svg).append("text")
+            .attr("class", "chart-label")
             .attr("transform", "rotate(-90)")
             .attr("y", 20)
-            .attr("x", -height / 2 - 80)
-            .text("Years Served in Congress")
-            .style("font-family", "Arial");
+            .attr("x", -height / 2)
+            .text("Years Served in Congress");
 
         //create x axis
         d3.select(svg).append("g")
